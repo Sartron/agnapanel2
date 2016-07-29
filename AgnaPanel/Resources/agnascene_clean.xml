@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agna-panel>
+  <id></id>
+  <fields>
+    <main>
+      <field name="to" color="#000000"></field>
+      <field name="ev" color="#000000"></field>
+      <field name="ma" color="#000000"></field>
+      <field name="an" color="#000000"></field>
+      <field name="mu" color="#000000"></field>
+      <field name="p1" color="#000000"></field>
+      <field name="p2" color="#000000"></field>
+      <field name="s1" color="#000000"></field>
+      <field name="s2" color="#000000"></field>
+      <field name="cam1" color="#000000"></field>
+      <field name="cam2" color="#000000"></field>
+      <field name="co1" color="#000000"></field>
+      <field name="co2" color="#000000"></field>
+      <field name="tw1" color="#000000"></field>
+      <field name="tw2" color="#000000"></field>
+    </main>
+    <custom>
+      <field name="cust1" color="#000000"></field>
+      <field name="cust2" color="#000000"></field>
+    </custom>
+  </fields>
+  <images>
+    <main>
+      <image name="p1" game="1" character="13" path="">
+        <x>0</x>
+        <y>0</y>
+        <w>0</w>
+        <h>0</h>
+        <scale>1.0</scale>
+        <reverse>false</reverse>
+        <base64></base64>
+      </image>
+      <image name="p2" game="1" character="13" path="">
+        <x>0</x>
+        <y>0</y>
+        <w>0</w>
+        <h>0</h>
+        <scale>1.0</scale>
+        <reverse>false</reverse>
+        <base64></base64>
+      </image>
+    </main>
+    <custom>
+      <image name="cust1" path="">
+        <x>0</x>
+        <y>0</y>
+        <w>0</w>
+        <h>0</h>
+        <scale>1.0</scale>
+        <reverse>false</reverse>
+        <base64></base64>
+      </image>
+      <image name="cust2" path="">
+        <x>0</x>
+        <y>0</y>
+        <w>0</w>
+        <h>0</h>
+        <scale>1.0</scale>
+        <reverse>false</reverse>
+        <base64></base64>
+      </image>
+    </custom>
+  </images>
+</agna-panel>

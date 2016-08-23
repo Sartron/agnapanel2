@@ -50,15 +50,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgnaScene.cs" />
+    <Compile Include="Chat\ChatMessage.cs" />
     <Compile Include="Controls\BorderedTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="IRCClient.cs" />
-    <Compile Include="MainFrm.cs">
+    <Compile Include="Chat\ChatClient.cs" />
+    <Compile Include="Forms\MainFrm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainFrm.Designer.cs">
+    <Compile Include="Forms\MainFrm.Designer.cs">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SettingsFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SettingsFrm.Designer.cs">
+      <DependentUpon>SettingsFrm.cs</DependentUpon>
     </Compile>
     <Compile Include="Net.cs" />
     <Compile Include="Program.cs" />
@@ -68,8 +75,11 @@
     <EmbeddedResource Include="Controls\BorderedTextBox.resx">
       <DependentUpon>BorderedTextBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainFrm.resx">
+    <EmbeddedResource Include="Forms\MainFrm.resx">
       <DependentUpon>MainFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SettingsFrm.resx">
+      <DependentUpon>SettingsFrm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -101,6 +111,29 @@
     <None Include="Resources\agnascene_clean.xml">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\music_note.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\swap_camera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\swap_characters.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\swap_players.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings_clean.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\challonge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

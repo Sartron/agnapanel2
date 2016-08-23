@@ -106,6 +106,13 @@ namespace AgnaPanel
             get { return textBox.Text; }
             set { textBox.Text = value; }
         }
+        [Description("Indicates how the text should be aligned for edit controls.")]
+        public HorizontalAlignment TextAlign
+        {
+            get { return textBox.TextAlign; }
+            set { textBox.TextAlign = value; }
+        }
+
 
         //Events
         //[Description("Occurs when the component is clicked.")]

@@ -82,7 +82,7 @@ namespace AgnaPanel.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-        ///&lt;agna-panel&gt;
+        ///&lt;agna-scene&gt;
         ///  &lt;id&gt;&lt;/id&gt;
         ///  &lt;fields&gt;
         ///    &lt;main&gt;
@@ -99,6 +99,95 @@ namespace AgnaPanel.Properties {
         internal static string agnascene_clean {
             get {
                 return ResourceManager.GetString("agnascene_clean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap challonge {
+            get {
+                object obj = ResourceManager.GetObject("challonge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap music_note {
+            get {
+                object obj = ResourceManager.GetObject("music_note", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap right_arrow {
+            get {
+                object obj = ResourceManager.GetObject("right_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;agna-settings&gt;
+        ///	&lt;window&gt;
+        ///    &lt;ontop enabled=&quot;false&quot; /&gt;
+        ///		&lt;taskbar enabled=&quot;true&quot; /&gt;
+        ///		&lt;tray enabled=&quot;false&quot; minimize=&quot;false&quot; close=&quot;false&quot; /&gt;
+        ///	&lt;/window&gt;
+        ///	&lt;chat&gt;
+        ///		&lt;username /&gt;
+        ///		&lt;oauth /&gt;
+        ///    &lt;channel /&gt;
+        ///    &lt;acceptCmds enabled=&quot;true&quot; /&gt;
+        ///	&lt;/chat&gt;
+        ///	&lt;recent max=&quot;10&quot; load=&quot;true&quot; /&gt;
+        ///	&lt;autocomplete&gt;
+        ///		&lt;rounds&gt;
+        ///			&lt;round&gt;Winners Round&lt;/round&gt;
+        ///			&lt;round&gt;Winners Quarters&lt;/round&gt;
+        ///			&lt;round&gt;Winners Semis&lt;/round&gt;
+        ///			&lt;round&gt;Winners Finals&lt;/round&gt;
+        ///			&lt;round&gt;Los [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string settings_clean {
+            get {
+                return ResourceManager.GetString("settings_clean", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap swap_camera {
+            get {
+                object obj = ResourceManager.GetObject("swap_camera", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap swap_characters {
+            get {
+                object obj = ResourceManager.GetObject("swap_characters", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap swap_players {
+            get {
+                object obj = ResourceManager.GetObject("swap_players", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

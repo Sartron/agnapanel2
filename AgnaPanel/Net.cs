@@ -18,7 +18,7 @@ namespace AgnaPanel
                 {
                     return webClient.DownloadString(url);
                 }
-                catch (WebException)
+                catch (Exception)
                 {
                     return String.Empty;
                 }
@@ -33,10 +33,17 @@ namespace AgnaPanel
         {
             using (Ping ping = new Ping())
             {
-                if (ping.Send(url).Status == IPStatus.Success)
-                    return true;
-                else
+                try
+                {
+                    if (ping.Send(url).Status == IPStatus.Success)
+                        return true;
+                    else
+                        return false;
+                }
+                catch (Exception)
+                {
                     return false;
+                }
             }
         }
     }

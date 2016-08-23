@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<agna-settings>
+	<window>
+    <ontop enabled="false" />
+		<taskbar enabled="true" />
+		<tray enabled="false" minimize="false" close="false" />
+	</window>
+	<chat>
+		<username />
+		<oauth />
+    <channel />
+    <acceptCmds enabled="true" />
+	</chat>
+	<recent max="10" load="true" />
+	<autocomplete>
+		<rounds>
+			<round>Winners Round</round>
+			<round>Winners Quarters</round>
+			<round>Winners Semis</round>
+			<round>Winners Finals</round>
+			<round>Losers Round</round>
+			<round>Losers Quarters</round>
+			<round>Losers Semis</round>
+			<round>Losers Finals</round>
+			<round>Grand Finals</round>
+		</rounds>
+		<names />
+	</autocomplete>
+  <images path="">
+    <categories>
+      <category name="None" />
+      <category name="Smash64" />
+      <category name="Melee" />
+      <category name="Brawl" />
+      <category name="Smash4" />
+    </categories>
+  </images>
+</agna-settings>

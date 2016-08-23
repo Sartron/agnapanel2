@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<agna-panel>
+<agna-scene>
   <id></id>
   <fields>
     <main>
@@ -66,4 +66,4 @@
       </image>
     </custom>
   </images>
-</agna-panel>
+</agna-scene>

@@ -30,6 +30,7 @@ namespace AgnaPanel
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,8 +40,6 @@ namespace AgnaPanel
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.openRecentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.clearHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openAgnaDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,22 +66,28 @@ namespace AgnaPanel
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabsFields = new System.Windows.Forms.TabControl();
             this.tabSpecial = new System.Windows.Forms.TabPage();
+            this.lblAnnouncement = new System.Windows.Forms.Label();
             this.lblMusic = new System.Windows.Forms.Label();
             this.pictureMusicNote = new System.Windows.Forms.PictureBox();
             this.lblCamera2 = new System.Windows.Forms.Label();
             this.btnSwapCameras = new System.Windows.Forms.Button();
             this.lblCamera1 = new System.Windows.Forms.Label();
             this.tabCommentary = new System.Windows.Forms.TabPage();
-            this.tabCustom = new System.Windows.Forms.TabPage();
-            this.tabIRC = new System.Windows.Forms.TabPage();
-            this.txtSendIRC = new System.Windows.Forms.RichTextBox();
-            this.txtIRC = new System.Windows.Forms.RichTextBox();
-            this.lblAnnouncement = new System.Windows.Forms.Label();
+            this.lblComm2Twitter = new System.Windows.Forms.Label();
+            this.lblComm1Twitter = new System.Windows.Forms.Label();
             this.lblComm2 = new System.Windows.Forms.Label();
             this.btnSwapComms = new System.Windows.Forms.Button();
             this.lblComm1 = new System.Windows.Forms.Label();
-            this.lblComm2Twitter = new System.Windows.Forms.Label();
-            this.lblComm1Twitter = new System.Windows.Forms.Label();
+            this.tabCustom = new System.Windows.Forms.TabPage();
+            this.tabIRC = new System.Windows.Forms.TabPage();
+            this.panelChat = new System.Windows.Forms.Panel();
+            this.txtSendIRC = new System.Windows.Forms.RichTextBox();
+            this.txtIRC = new System.Windows.Forms.RichTextBox();
+            this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.timerChat = new System.Windows.Forms.Timer(this.components);
+            this.trayIcon_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.txtMatch = new AgnaPanel.BorderedTextBox();
             this.txtEvent = new AgnaPanel.BorderedTextBox();
             this.txtTournamentName = new AgnaPanel.BorderedTextBox();
@@ -109,6 +114,8 @@ namespace AgnaPanel
             ((System.ComponentModel.ISupportInitialize)(this.pictureMusicNote)).BeginInit();
             this.tabCommentary.SuspendLayout();
             this.tabIRC.SuspendLayout();
+            this.panelChat.SuspendLayout();
+            this.trayIcon_menu.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -188,23 +195,9 @@ namespace AgnaPanel
             // 
             // openRecentToolStripMenuItem
             // 
-            this.openRecentToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator3,
-            this.clearHistoryToolStripMenuItem});
             this.openRecentToolStripMenuItem.Name = "openRecentToolStripMenuItem";
             this.openRecentToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.openRecentToolStripMenuItem.Text = "Open Recent";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(139, 6);
-            // 
-            // clearHistoryToolStripMenuItem
-            // 
-            this.clearHistoryToolStripMenuItem.Name = "clearHistoryToolStripMenuItem";
-            this.clearHistoryToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.clearHistoryToolStripMenuItem.Text = "Clear History";
             // 
             // openAgnaDirectoryToolStripMenuItem
             // 
@@ -236,8 +229,10 @@ namespace AgnaPanel
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.optionsToolStripMenuItem.Text = "Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // openAgnaDialog
             // 
@@ -491,6 +486,15 @@ namespace AgnaPanel
             this.tabSpecial.Text = "Special";
             this.tabSpecial.UseVisualStyleBackColor = true;
             // 
+            // lblAnnouncement
+            // 
+            this.lblAnnouncement.AutoSize = true;
+            this.lblAnnouncement.Location = new System.Drawing.Point(103, 61);
+            this.lblAnnouncement.Name = "lblAnnouncement";
+            this.lblAnnouncement.Size = new System.Drawing.Size(79, 13);
+            this.lblAnnouncement.TabIndex = 10;
+            this.lblAnnouncement.Text = "Announcement";
+            // 
             // lblMusic
             // 
             this.lblMusic.AutoSize = true;
@@ -546,13 +550,13 @@ namespace AgnaPanel
             // 
             this.tabCommentary.Controls.Add(this.txtComm2Twitter);
             this.tabCommentary.Controls.Add(this.lblComm2Twitter);
-            this.tabCommentary.Controls.Add(this.txtComm1Twitter);
             this.tabCommentary.Controls.Add(this.lblComm1Twitter);
-            this.tabCommentary.Controls.Add(this.txtComm2);
             this.tabCommentary.Controls.Add(this.lblComm2);
-            this.tabCommentary.Controls.Add(this.txtComm1);
             this.tabCommentary.Controls.Add(this.btnSwapComms);
             this.tabCommentary.Controls.Add(this.lblComm1);
+            this.tabCommentary.Controls.Add(this.txtComm1Twitter);
+            this.tabCommentary.Controls.Add(this.txtComm2);
+            this.tabCommentary.Controls.Add(this.txtComm1);
             this.tabCommentary.Location = new System.Drawing.Point(4, 22);
             this.tabCommentary.Name = "tabCommentary";
             this.tabCommentary.Padding = new System.Windows.Forms.Padding(3);
@@ -561,56 +565,23 @@ namespace AgnaPanel
             this.tabCommentary.Text = "Commentators";
             this.tabCommentary.UseVisualStyleBackColor = true;
             // 
-            // tabCustom
+            // lblComm2Twitter
             // 
-            this.tabCustom.Location = new System.Drawing.Point(4, 22);
-            this.tabCustom.Name = "tabCustom";
-            this.tabCustom.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCustom.Size = new System.Drawing.Size(268, 89);
-            this.tabCustom.TabIndex = 2;
-            this.tabCustom.Text = "Custom";
-            this.tabCustom.UseVisualStyleBackColor = true;
+            this.lblComm2Twitter.AutoSize = true;
+            this.lblComm2Twitter.Location = new System.Drawing.Point(137, 32);
+            this.lblComm2Twitter.Name = "lblComm2Twitter";
+            this.lblComm2Twitter.Size = new System.Drawing.Size(76, 13);
+            this.lblComm2Twitter.TabIndex = 14;
+            this.lblComm2Twitter.Text = "Twitter Handle";
             // 
-            // tabIRC
+            // lblComm1Twitter
             // 
-            this.tabIRC.Controls.Add(this.txtSendIRC);
-            this.tabIRC.Controls.Add(this.txtIRC);
-            this.tabIRC.Location = new System.Drawing.Point(4, 22);
-            this.tabIRC.Name = "tabIRC";
-            this.tabIRC.Padding = new System.Windows.Forms.Padding(3);
-            this.tabIRC.Size = new System.Drawing.Size(493, 236);
-            this.tabIRC.TabIndex = 1;
-            this.tabIRC.Text = "Chat";
-            this.tabIRC.UseVisualStyleBackColor = true;
-            // 
-            // txtSendIRC
-            // 
-            this.txtSendIRC.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSendIRC.Location = new System.Drawing.Point(6, 206);
-            this.txtSendIRC.Name = "txtSendIRC";
-            this.txtSendIRC.Size = new System.Drawing.Size(481, 24);
-            this.txtSendIRC.TabIndex = 1;
-            this.txtSendIRC.Text = "";
-            this.txtSendIRC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSendIRC_KeyPress);
-            // 
-            // txtIRC
-            // 
-            this.txtIRC.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtIRC.Location = new System.Drawing.Point(6, 6);
-            this.txtIRC.Name = "txtIRC";
-            this.txtIRC.ReadOnly = true;
-            this.txtIRC.Size = new System.Drawing.Size(481, 194);
-            this.txtIRC.TabIndex = 0;
-            this.txtIRC.Text = "";
-            // 
-            // lblAnnouncement
-            // 
-            this.lblAnnouncement.AutoSize = true;
-            this.lblAnnouncement.Location = new System.Drawing.Point(103, 61);
-            this.lblAnnouncement.Name = "lblAnnouncement";
-            this.lblAnnouncement.Size = new System.Drawing.Size(79, 13);
-            this.lblAnnouncement.TabIndex = 10;
-            this.lblAnnouncement.Text = "Announcement";
+            this.lblComm1Twitter.AutoSize = true;
+            this.lblComm1Twitter.Location = new System.Drawing.Point(137, 3);
+            this.lblComm1Twitter.Name = "lblComm1Twitter";
+            this.lblComm1Twitter.Size = new System.Drawing.Size(76, 13);
+            this.lblComm1Twitter.TabIndex = 12;
+            this.lblComm1Twitter.Text = "Twitter Handle";
             // 
             // lblComm2
             // 
@@ -644,30 +615,97 @@ namespace AgnaPanel
             this.lblComm1.TabIndex = 7;
             this.lblComm1.Text = "Commentator 1";
             // 
-            // lblComm2Twitter
+            // tabCustom
             // 
-            this.lblComm2Twitter.AutoSize = true;
-            this.lblComm2Twitter.Location = new System.Drawing.Point(137, 32);
-            this.lblComm2Twitter.Name = "lblComm2Twitter";
-            this.lblComm2Twitter.Size = new System.Drawing.Size(76, 13);
-            this.lblComm2Twitter.TabIndex = 14;
-            this.lblComm2Twitter.Text = "Twitter Handle";
+            this.tabCustom.Location = new System.Drawing.Point(4, 22);
+            this.tabCustom.Name = "tabCustom";
+            this.tabCustom.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCustom.Size = new System.Drawing.Size(268, 89);
+            this.tabCustom.TabIndex = 2;
+            this.tabCustom.Text = "Custom";
+            this.tabCustom.UseVisualStyleBackColor = true;
             // 
-            // lblComm1Twitter
+            // tabIRC
             // 
-            this.lblComm1Twitter.AutoSize = true;
-            this.lblComm1Twitter.Location = new System.Drawing.Point(137, 3);
-            this.lblComm1Twitter.Name = "lblComm1Twitter";
-            this.lblComm1Twitter.Size = new System.Drawing.Size(76, 13);
-            this.lblComm1Twitter.TabIndex = 12;
-            this.lblComm1Twitter.Text = "Twitter Handle";
+            this.tabIRC.Controls.Add(this.panelChat);
+            this.tabIRC.Location = new System.Drawing.Point(4, 22);
+            this.tabIRC.Name = "tabIRC";
+            this.tabIRC.Padding = new System.Windows.Forms.Padding(3);
+            this.tabIRC.Size = new System.Drawing.Size(493, 236);
+            this.tabIRC.TabIndex = 1;
+            this.tabIRC.Text = "Chat";
+            this.tabIRC.UseVisualStyleBackColor = true;
+            // 
+            // panelChat
+            // 
+            this.panelChat.Controls.Add(this.txtSendIRC);
+            this.panelChat.Controls.Add(this.txtIRC);
+            this.panelChat.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelChat.Location = new System.Drawing.Point(3, 3);
+            this.panelChat.Name = "panelChat";
+            this.panelChat.Size = new System.Drawing.Size(487, 230);
+            this.panelChat.TabIndex = 0;
+            // 
+            // txtSendIRC
+            // 
+            this.txtSendIRC.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSendIRC.Location = new System.Drawing.Point(3, 203);
+            this.txtSendIRC.Name = "txtSendIRC";
+            this.txtSendIRC.Size = new System.Drawing.Size(481, 24);
+            this.txtSendIRC.TabIndex = 3;
+            this.txtSendIRC.Text = "";
+            this.txtSendIRC.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSendIRC_KeyPress);
+            // 
+            // txtIRC
+            // 
+            this.txtIRC.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtIRC.Location = new System.Drawing.Point(3, 3);
+            this.txtIRC.Name = "txtIRC";
+            this.txtIRC.ReadOnly = true;
+            this.txtIRC.Size = new System.Drawing.Size(481, 194);
+            this.txtIRC.TabIndex = 2;
+            this.txtIRC.Text = "";
+            // 
+            // trayIcon
+            // 
+            this.trayIcon.ContextMenuStrip = this.trayIcon_menu;
+            this.trayIcon.Icon = global::AgnaPanel.Properties.Resources.agna_wing_flat_red;
+            this.trayIcon.Text = "AgnaPanel";
+            this.trayIcon.DoubleClick += new System.EventHandler(this.trayIcon_DoubleClick);
+            // 
+            // timerChat
+            // 
+            this.timerChat.Interval = 250;
+            this.timerChat.Tick += new System.EventHandler(this.timerChat_Tick);
+            // 
+            // trayIcon_menu
+            // 
+            this.trayIcon_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem1,
+            this.exitToolStripMenuItem1});
+            this.trayIcon_menu.Name = "trayIcon_menu";
+            this.trayIcon_menu.Size = new System.Drawing.Size(104, 48);
+            // 
+            // openToolStripMenuItem1
+            // 
+            this.openToolStripMenuItem1.Name = "openToolStripMenuItem1";
+            this.openToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem1.Text = "Open";
+            this.openToolStripMenuItem1.Click += new System.EventHandler(this.openToolStripMenuItem1_Click);
+            // 
+            // exitToolStripMenuItem1
+            // 
+            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem1.Text = "Exit";
+            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
             // txtMatch
             // 
             this.txtMatch.AcceptsReturn = false;
             this.txtMatch.AcceptsTab = false;
-            this.txtMatch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtMatch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtMatch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtMatch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtMatch.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.txtMatch.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txtMatch.Lines = new string[0];
@@ -754,8 +792,8 @@ namespace AgnaPanel
             // 
             this.txtP2Name.AcceptsReturn = false;
             this.txtP2Name.AcceptsTab = false;
-            this.txtP2Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtP2Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtP2Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtP2Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtP2Name.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.txtP2Name.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txtP2Name.Lines = new string[0];
@@ -771,8 +809,8 @@ namespace AgnaPanel
             // 
             this.txtP1Name.AcceptsReturn = false;
             this.txtP1Name.AcceptsTab = false;
-            this.txtP1Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtP1Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtP1Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtP1Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.txtP1Name.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
             this.txtP1Name.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.txtP1Name.Lines = new string[0];
@@ -933,6 +971,8 @@ namespace AgnaPanel
             this.MaximizeBox = false;
             this.Name = "MainFrm";
             this.Text = "AgnaPanel";
+            this.Load += new System.EventHandler(this.MainFrm_Load);
+            this.Resize += new System.EventHandler(this.MainFrm_Resize);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.tabsBase.ResumeLayout(false);
@@ -949,6 +989,8 @@ namespace AgnaPanel
             this.tabCommentary.ResumeLayout(false);
             this.tabCommentary.PerformLayout();
             this.tabIRC.ResumeLayout(false);
+            this.panelChat.ResumeLayout(false);
+            this.trayIcon_menu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -966,8 +1008,6 @@ namespace AgnaPanel
         private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem openRecentToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem clearHistoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openAgnaDirectoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -977,8 +1017,6 @@ namespace AgnaPanel
         private TabPage tabPanel;
         private TabPage tabIRC;
         private ToolStripMenuItem optionsToolStripMenuItem;
-        private RichTextBox txtIRC;
-        private RichTextBox txtSendIRC;
         private FlowLayoutPanel panelFields;
         private TableLayoutPanel panelTournament;
         private Label lblMatch;
@@ -1024,5 +1062,13 @@ namespace AgnaPanel
         private Label lblComm2Twitter;
         private BorderedTextBox txtComm1Twitter;
         private Label lblComm1Twitter;
+        private NotifyIcon trayIcon;
+        private Timer timerChat;
+        private Panel panelChat;
+        private RichTextBox txtSendIRC;
+        private RichTextBox txtIRC;
+        private ContextMenuStrip trayIcon_menu;
+        private ToolStripMenuItem openToolStripMenuItem1;
+        private ToolStripMenuItem exitToolStripMenuItem1;
     }
 }

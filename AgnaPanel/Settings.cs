@@ -2,14 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -50,7 +45,7 @@ namespace AgnaPanel
             //Parse chat settings
             ParseChat();
 
-            ////Parse recent files
+            //Parse recent files
             ParseRecentFiles();
 
             //Parse autocomplete entries
@@ -137,7 +132,7 @@ namespace AgnaPanel
         }
 
         /// <summary>
-        /// Load recently loaded .agna files and related settings
+        /// Load recently loaded AgnaScene files and related settings
         /// </summary>
         private static void ParseRecentFiles()
         {
@@ -206,8 +201,8 @@ namespace AgnaPanel
             if (settingsXML.Root.Elements("images").Count() != 1)
                 return;
 
-            if (settingsXML.Root.Element("images").Attribute("path") != null && !String.IsNullOrWhiteSpace(settingsXML.Root.Element("images").Attribute("path").Value))
-                Images.Root = settingsXML.Root.Element("images").Attribute("path").Value;
+            //if (settingsXML.Root.Element("images").Attribute("root") != null)
+            //    Images.Root = settingsXML.Root.Element("images").Attribute("root").Value;
 
             if (settingsXML.Root.Element("images").Elements("categories").Count() == 1 && settingsXML.Root.Element("images").Element("categories").Elements("category").Count() > 0)
             {
@@ -217,10 +212,38 @@ namespace AgnaPanel
                         Images.Categories.Add(new AgnaImageCategory(category));
                 }
             }
+        }
+
+        /// <summary>
+        /// Saves only the recent file entries for the settings file
+        /// </summary>
+        public static void SaveRecentFiles()
+        {
+            // :(
+
+            //Recent File settings
+            XElement newRecentFiles = new XElement("recent", new XAttribute("max", RecentFiles.MaxFiles), new XAttribute("load", RecentFiles.Load));
+            if (RecentFiles.MaxFiles > 0)
+            {
+                int index = 0;
+                foreach (string file in RecentFiles.Files.Distinct().ToList())
+                {
+                    newRecentFiles.Add(new XElement("file", file));
+                    index++;
+
+                    if (index == RecentFiles.MaxFiles) //Stop adding files if max cap is hit
+                        break;
+                }
+            }
             
-            //Chill out
-            foreach (AgnaImageCategory category in Images.Categories)
-                Debug.WriteLine(category);
+            Debug.WriteLine(settingsXML.Root.Element("recent"));
+
+            if (settingsXML.Root.Element("recent") != null)
+                settingsXML.Root.Element("recent").ReplaceWith(newRecentFiles);
+            else
+                settingsXML.Root.Add(newRecentFiles);
+            
+            settingsXML.Save(Path);
         }
 
         /// <summary>
@@ -228,8 +251,6 @@ namespace AgnaPanel
         /// </summary>
         public static void Save()
         {
-            XDocument newSettingsFile;
-
             //Window settings
             XElement newWindow = new XElement("window",
                 new XElement("ontop", new XAttribute("enabled", Window.onTop)),
@@ -275,13 +296,13 @@ namespace AgnaPanel
                 names);
 
             //Image settings
-            XElement newImages = new XElement("images", new XAttribute("path", Images.Root));
+            XElement newImages = new XElement("images", !String.IsNullOrWhiteSpace(Images.Root) ? new XAttribute("root", Images.Root) : null);
             XElement categories = new XElement("categories");
             foreach (AgnaImageCategory category in Images.Categories)
                 categories.Add(category);
             newImages.Add(categories);
 
-            newSettingsFile = new XDocument(new XElement("agna-settings",
+            settingsXML = new XDocument(new XElement("agna-settings",
                 newWindow,
                 newChat,
                 newRecentFiles,
@@ -289,7 +310,7 @@ namespace AgnaPanel
                 newImages
                 ));
 
-            Debug.WriteLine(newSettingsFile);
+            settingsXML.Save(Path);
         }
 
         public class AgnaImageCategory : XElement
@@ -300,7 +321,37 @@ namespace AgnaPanel
                 set { Attribute("name").Value = value; }
             }
 
-            private List<AgnaImage> Images = new List<AgnaImage>();
+            public string Path
+            {
+                get
+                {
+                    return Attribute("path") != null ? Attribute("path").Value : String.Empty;
+                }
+                set
+                {
+                    if (String.IsNullOrWhiteSpace(value)) //Delete the attribute
+                    {
+                        if (Attribute("path") != null)
+                        {
+                            XAttribute xAttr_path = Attribute("path");
+                            xAttr_path.Remove();
+                        }
+                    }
+                    else
+                    {
+                        if (Attribute("path") != null) //Attribute 'path' exists
+                            Attribute("path").Value = value;
+                        else //Attribute 'path' does not exist
+                            Add(new XAttribute("path", value));
+                    }
+                }
+            }
+
+            private List<AgnaImage> _Images = new List<AgnaImage>();
+            public List<AgnaImage> Images
+            {
+                get { return _Images; }
+            }
 
             public AgnaImageCategory(string name) : base(name: "category")
             {
@@ -309,42 +360,83 @@ namespace AgnaPanel
 
             public AgnaImageCategory(XElement xElement) : base(xElement)
             {
-                Elements().Remove();
+                //Clear all pre-existing nodes/attributes from the base constructor
+                RemoveAll();
+
+                //If attribute 'name' and 'path' is not null, either use them or 'null'
+                ReplaceAttributes(new XAttribute("name", xElement.Attribute("name") != null ?
+                    !String.IsNullOrEmpty(xElement.Attribute("name").Value) ? xElement.Attribute("name").Value : "category" :
+                    "null"),
+                    xElement.Attribute("path") != null ? xElement.Attribute("path") : null
+                    );
+
+                //Parse valid Agna Images from xElement
                 foreach (XElement image in xElement.Elements("image"))
                 {
                     if (AgnaImage.isAgnaImage(image))
                     {
                         Add(new AgnaImage(image));
-                        Images.Add(new AgnaImage(image));
+                        _Images.Add(new AgnaImage(image));
                     }
                 }
             }
 
-            public void AddAgnaImage(AgnaImage image)
+            public static bool isAgnaImageCategory(XElement xElement) => xElement.Attribute("name") != null;
+
+            public void AddAgnaImage(string path)
             {
-                Add(image);
-                Images.Add(image);
+                Add(new AgnaImage(path));
+                _Images.Add(new AgnaImage(path));
             }
 
-            public void RemoveAgnaImage(int index)
+            public bool RemoveAgnaImage(int index)
             {
-                if (index > Images.Count)
-                    return;
+                if (index + 1 > Elements().Count())
+                    return false;
 
-                AgnaImage findThis = Images[index];
-                Images[index].Remove();
-                
-                //Find way to remove AgnaImage entry from this list :)))))))))))))
+                _Images.RemoveAt(index);
+                Elements().ToList()[index].Remove();
+                return true;
             }
 
-            public static bool isAgnaImageCategory(XElement xElement) => xElement.Attribute("name") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("name").Value);
+            public bool ReplaceAgnaImage(AgnaImage image, int index)
+            {
+                if (index + 1 > Elements().Count())
+                    return false;
+
+                _Images[index] = image;
+                Elements().ToList()[index].ReplaceWith(image);
+                return true;
+            }
+
+            public AgnaImageCategory Clone() => new AgnaImageCategory(this);
         }
         public class AgnaImage : XElement
         {
             public new string Name
             {
-                get { return Attribute("name").Value; }
-                set { Attribute("name").Value = value; }
+                get
+                {
+                    return Attribute("name") != null ? Attribute("name").Value : String.Empty;
+                }
+                set
+                {
+                    if (String.IsNullOrEmpty(value)) //Delete the attribute
+                    {
+                        if (Attribute("name") != null)
+                        {
+                            XAttribute xAttr_name = Attribute("name");
+                            xAttr_name.Remove();
+                        }
+                    }
+                    else
+                    {
+                        if (Attribute("name") != null) //Attribute 'name' exists
+                            Attribute("name").Value = value;
+                        else //Attribute 'name' does not exist
+                            Add(new XAttribute("name", value));
+                    }
+                }
             }
 
             public string Path
@@ -352,22 +444,27 @@ namespace AgnaPanel
                 get { return Attribute("path").Value; }
                 set { Attribute("path").Value = value; }
             }
-            public AgnaImage(string name, string path) : base(name: "image")
+
+            public AgnaImage(string path) : base(name: "image")
             {
-                ReplaceAttributes(new XAttribute("name", name), new XAttribute("path", path));
+                ReplaceAttributes(new XAttribute("path", path));
             }
 
             public AgnaImage(XElement xElement) : base(xElement)
             {
+                //Clear all pre-existing nodes/attributes from the base constructor
                 RemoveAll();
-                ReplaceAttributes(new XAttribute("name", xElement.Attribute("name").Value), new XAttribute("path", xElement.Attribute("path").Value));
+
+                //If attribute 'path' is not null, either use the existing name or String.Empty
+                ReplaceAttributes(xElement.Attribute("name") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("name").Value) ? xElement.Attribute("name") : null,
+                    new XAttribute("path", xElement.Attribute("path") != null ? xElement.Attribute("path").Value : String.Empty)
+                    );
             }
 
-            public static bool isAgnaImage(XElement xElement) => (xElement.Attribute("name") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("name").Value)) ||
-                (xElement.Attribute("path") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("path").Value));
+            public static bool isAgnaImage(XElement xElement) => (xElement.Attribute("path") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("path").Value));
+
+            public AgnaImage Clone() => new AgnaImage(this);
         }
-
-
 
         #region Internal Program Settings
         public class Window

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <agna-scene>
-  <id></id>
+  <name></name>
   <fields>
     <main>
       <field name="to" color="#000000"></field>
@@ -20,13 +20,13 @@
       <field name="tw2" color="#000000"></field>
     </main>
     <custom>
-      <field name="cust1" color="#000000"></field>
-      <field name="cust2" color="#000000"></field>
+      <field name="tweet" color="#000000"></field>
+      <field name="newsub" color="#000000"></field>
     </custom>
   </fields>
   <images>
     <main>
-      <image name="p1" game="1" character="13" path="">
+      <image name="p1" path="">
         <x>0</x>
         <y>0</y>
         <w>0</w>
@@ -35,7 +35,7 @@
         <reverse>false</reverse>
         <base64></base64>
       </image>
-      <image name="p2" game="1" character="13" path="">
+      <image name="p2" path="">
         <x>0</x>
         <y>0</y>
         <w>0</w>

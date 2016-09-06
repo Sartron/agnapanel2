@@ -51,58 +51,58 @@ namespace AgnaPanel
             this.tabPanel = new System.Windows.Forms.TabPage();
             this.panelFields = new System.Windows.Forms.FlowLayoutPanel();
             this.panelTournament = new System.Windows.Forms.TableLayoutPanel();
+            this.txtMatch = new AgnaPanel.BorderedTextBox();
+            this.txtEvent = new AgnaPanel.BorderedTextBox();
             this.lblMatch = new System.Windows.Forms.Label();
             this.lblEvent = new System.Windows.Forms.Label();
             this.lblTournamentName = new System.Windows.Forms.Label();
+            this.txtTournamentName = new AgnaPanel.BorderedTextBox();
             this.panelPlayers = new System.Windows.Forms.Panel();
-            this.comboP1Char = new System.Windows.Forms.ComboBox();
-            this.comboP2Char = new System.Windows.Forms.ComboBox();
-            this.comboP2Game = new System.Windows.Forms.ComboBox();
+            this.comboP1Image = new System.Windows.Forms.ComboBox();
+            this.txtP1Score = new AgnaPanel.BorderedTextBox();
+            this.comboP2Image = new System.Windows.Forms.ComboBox();
+            this.comboP2Category = new System.Windows.Forms.ComboBox();
+            this.txtP2Score = new AgnaPanel.BorderedTextBox();
+            this.txtP2Name = new AgnaPanel.BorderedTextBox();
             this.lblP2 = new System.Windows.Forms.Label();
-            this.comboP1Game = new System.Windows.Forms.ComboBox();
+            this.comboP1Category = new System.Windows.Forms.ComboBox();
             this.btnSwapNames = new System.Windows.Forms.Button();
             this.btnSwapChars = new System.Windows.Forms.Button();
+            this.txtP1Name = new AgnaPanel.BorderedTextBox();
             this.lblP1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabsFields = new System.Windows.Forms.TabControl();
             this.tabSpecial = new System.Windows.Forms.TabPage();
+            this.txtAnnouncement = new AgnaPanel.BorderedTextBox();
             this.lblAnnouncement = new System.Windows.Forms.Label();
+            this.txtMusic = new AgnaPanel.BorderedTextBox();
             this.lblMusic = new System.Windows.Forms.Label();
             this.pictureMusicNote = new System.Windows.Forms.PictureBox();
+            this.txtCamera2 = new AgnaPanel.BorderedTextBox();
             this.lblCamera2 = new System.Windows.Forms.Label();
+            this.txtCamera1 = new AgnaPanel.BorderedTextBox();
             this.btnSwapCameras = new System.Windows.Forms.Button();
             this.lblCamera1 = new System.Windows.Forms.Label();
             this.tabCommentary = new System.Windows.Forms.TabPage();
+            this.txtComm2Twitter = new AgnaPanel.BorderedTextBox();
             this.lblComm2Twitter = new System.Windows.Forms.Label();
             this.lblComm1Twitter = new System.Windows.Forms.Label();
             this.lblComm2 = new System.Windows.Forms.Label();
             this.btnSwapComms = new System.Windows.Forms.Button();
             this.lblComm1 = new System.Windows.Forms.Label();
+            this.txtComm1Twitter = new AgnaPanel.BorderedTextBox();
+            this.txtComm2 = new AgnaPanel.BorderedTextBox();
+            this.txtComm1 = new AgnaPanel.BorderedTextBox();
             this.tabCustom = new System.Windows.Forms.TabPage();
             this.tabIRC = new System.Windows.Forms.TabPage();
             this.panelChat = new System.Windows.Forms.Panel();
             this.txtSendIRC = new System.Windows.Forms.RichTextBox();
             this.txtIRC = new System.Windows.Forms.RichTextBox();
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.timerChat = new System.Windows.Forms.Timer(this.components);
             this.trayIcon_menu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtMatch = new AgnaPanel.BorderedTextBox();
-            this.txtEvent = new AgnaPanel.BorderedTextBox();
-            this.txtTournamentName = new AgnaPanel.BorderedTextBox();
-            this.txtP1Score = new AgnaPanel.BorderedTextBox();
-            this.txtP2Score = new AgnaPanel.BorderedTextBox();
-            this.txtP2Name = new AgnaPanel.BorderedTextBox();
-            this.txtP1Name = new AgnaPanel.BorderedTextBox();
-            this.txtAnnouncement = new AgnaPanel.BorderedTextBox();
-            this.txtMusic = new AgnaPanel.BorderedTextBox();
-            this.txtCamera2 = new AgnaPanel.BorderedTextBox();
-            this.txtCamera1 = new AgnaPanel.BorderedTextBox();
-            this.txtComm2Twitter = new AgnaPanel.BorderedTextBox();
-            this.txtComm1Twitter = new AgnaPanel.BorderedTextBox();
-            this.txtComm2 = new AgnaPanel.BorderedTextBox();
-            this.txtComm1 = new AgnaPanel.BorderedTextBox();
+            this.timerChat = new System.Windows.Forms.Timer(this.components);
             this.mainMenu.SuspendLayout();
             this.tabsBase.SuspendLayout();
             this.tabPanel.SuspendLayout();
@@ -299,6 +299,42 @@ namespace AgnaPanel
             this.panelTournament.Size = new System.Drawing.Size(279, 28);
             this.panelTournament.TabIndex = 0;
             // 
+            // txtMatch
+            // 
+            this.txtMatch.AcceptsReturn = false;
+            this.txtMatch.AcceptsTab = false;
+            this.txtMatch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
+            this.txtMatch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtMatch.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtMatch.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtMatch.Lines = new string[0];
+            this.txtMatch.Location = new System.Drawing.Point(189, 13);
+            this.txtMatch.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.txtMatch.MaxLength = 32767;
+            this.txtMatch.Multiline = false;
+            this.txtMatch.Name = "txtMatch";
+            this.txtMatch.Size = new System.Drawing.Size(90, 20);
+            this.txtMatch.TabIndex = 5;
+            this.txtMatch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // txtEvent
+            // 
+            this.txtEvent.AcceptsReturn = false;
+            this.txtEvent.AcceptsTab = false;
+            this.txtEvent.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtEvent.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtEvent.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtEvent.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtEvent.Lines = new string[0];
+            this.txtEvent.Location = new System.Drawing.Point(96, 13);
+            this.txtEvent.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.txtEvent.MaxLength = 32767;
+            this.txtEvent.Multiline = false;
+            this.txtEvent.Name = "txtEvent";
+            this.txtEvent.Size = new System.Drawing.Size(90, 20);
+            this.txtEvent.TabIndex = 4;
+            this.txtEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
             // lblMatch
             // 
             this.lblMatch.AutoSize = true;
@@ -327,16 +363,34 @@ namespace AgnaPanel
             this.lblTournamentName.TabIndex = 0;
             this.lblTournamentName.Text = "Tournament";
             // 
+            // txtTournamentName
+            // 
+            this.txtTournamentName.AcceptsReturn = false;
+            this.txtTournamentName.AcceptsTab = false;
+            this.txtTournamentName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtTournamentName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtTournamentName.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtTournamentName.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtTournamentName.Lines = new string[0];
+            this.txtTournamentName.Location = new System.Drawing.Point(3, 13);
+            this.txtTournamentName.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.txtTournamentName.MaxLength = 32767;
+            this.txtTournamentName.Multiline = false;
+            this.txtTournamentName.Name = "txtTournamentName";
+            this.txtTournamentName.Size = new System.Drawing.Size(90, 20);
+            this.txtTournamentName.TabIndex = 3;
+            this.txtTournamentName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
             // panelPlayers
             // 
-            this.panelPlayers.Controls.Add(this.comboP1Char);
+            this.panelPlayers.Controls.Add(this.comboP1Image);
             this.panelPlayers.Controls.Add(this.txtP1Score);
-            this.panelPlayers.Controls.Add(this.comboP2Char);
-            this.panelPlayers.Controls.Add(this.comboP2Game);
+            this.panelPlayers.Controls.Add(this.comboP2Image);
+            this.panelPlayers.Controls.Add(this.comboP2Category);
             this.panelPlayers.Controls.Add(this.txtP2Score);
             this.panelPlayers.Controls.Add(this.txtP2Name);
             this.panelPlayers.Controls.Add(this.lblP2);
-            this.panelPlayers.Controls.Add(this.comboP1Game);
+            this.panelPlayers.Controls.Add(this.comboP1Category);
             this.panelPlayers.Controls.Add(this.btnSwapNames);
             this.panelPlayers.Controls.Add(this.btnSwapChars);
             this.panelPlayers.Controls.Add(this.txtP1Name);
@@ -347,38 +401,88 @@ namespace AgnaPanel
             this.panelPlayers.Size = new System.Drawing.Size(279, 86);
             this.panelPlayers.TabIndex = 1;
             // 
-            // comboP1Char
+            // comboP1Image
             // 
-            this.comboP1Char.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboP1Char.FormattingEnabled = true;
-            this.comboP1Char.Location = new System.Drawing.Point(137, 21);
-            this.comboP1Char.Name = "comboP1Char";
-            this.comboP1Char.Size = new System.Drawing.Size(93, 21);
-            this.comboP1Char.TabIndex = 13;
+            this.comboP1Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboP1Image.Enabled = false;
+            this.comboP1Image.FormattingEnabled = true;
+            this.comboP1Image.Location = new System.Drawing.Point(137, 21);
+            this.comboP1Image.Name = "comboP1Image";
+            this.comboP1Image.Size = new System.Drawing.Size(93, 21);
+            this.comboP1Image.TabIndex = 13;
             // 
-            // comboP2Char
+            // txtP1Score
             // 
-            this.comboP2Char.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboP2Char.FormattingEnabled = true;
-            this.comboP2Char.Location = new System.Drawing.Point(137, 65);
-            this.comboP2Char.Name = "comboP2Char";
-            this.comboP2Char.Size = new System.Drawing.Size(93, 21);
-            this.comboP2Char.TabIndex = 17;
+            this.txtP1Score.AcceptsReturn = false;
+            this.txtP1Score.AcceptsTab = false;
+            this.txtP1Score.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtP1Score.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtP1Score.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtP1Score.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtP1Score.Lines = new string[0];
+            this.txtP1Score.Location = new System.Drawing.Point(202, 5);
+            this.txtP1Score.MaxLength = 32767;
+            this.txtP1Score.Multiline = false;
+            this.txtP1Score.Name = "txtP1Score";
+            this.txtP1Score.Size = new System.Drawing.Size(28, 20);
+            this.txtP1Score.TabIndex = 16;
+            this.txtP1Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // comboP2Game
+            // comboP2Image
             // 
-            this.comboP2Game.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboP2Game.FormattingEnabled = true;
-            this.comboP2Game.Items.AddRange(new object[] {
-            "None",
-            "Smash 64",
-            "Melee",
-            "Brawl",
-            "Smash 4"});
-            this.comboP2Game.Location = new System.Drawing.Point(47, 65);
-            this.comboP2Game.Name = "comboP2Game";
-            this.comboP2Game.Size = new System.Drawing.Size(84, 21);
-            this.comboP2Game.TabIndex = 16;
+            this.comboP2Image.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboP2Image.Enabled = false;
+            this.comboP2Image.FormattingEnabled = true;
+            this.comboP2Image.Location = new System.Drawing.Point(137, 65);
+            this.comboP2Image.Name = "comboP2Image";
+            this.comboP2Image.Size = new System.Drawing.Size(93, 21);
+            this.comboP2Image.TabIndex = 17;
+            // 
+            // comboP2Category
+            // 
+            this.comboP2Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboP2Category.FormattingEnabled = true;
+            this.comboP2Category.Items.AddRange(new object[] {
+            "None"});
+            this.comboP2Category.Location = new System.Drawing.Point(47, 65);
+            this.comboP2Category.Name = "comboP2Category";
+            this.comboP2Category.Size = new System.Drawing.Size(84, 21);
+            this.comboP2Category.TabIndex = 16;
+            this.comboP2Category.SelectedIndexChanged += new System.EventHandler(this.comboP2Category_SelectedIndexChanged);
+            // 
+            // txtP2Score
+            // 
+            this.txtP2Score.AcceptsReturn = false;
+            this.txtP2Score.AcceptsTab = false;
+            this.txtP2Score.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtP2Score.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtP2Score.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtP2Score.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtP2Score.Lines = new string[0];
+            this.txtP2Score.Location = new System.Drawing.Point(202, 49);
+            this.txtP2Score.MaxLength = 32767;
+            this.txtP2Score.Multiline = false;
+            this.txtP2Score.Name = "txtP2Score";
+            this.txtP2Score.Size = new System.Drawing.Size(28, 20);
+            this.txtP2Score.TabIndex = 16;
+            this.txtP2Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // txtP2Name
+            // 
+            this.txtP2Name.AcceptsReturn = false;
+            this.txtP2Name.AcceptsTab = false;
+            this.txtP2Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtP2Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtP2Name.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtP2Name.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtP2Name.Lines = new string[0];
+            this.txtP2Name.Location = new System.Drawing.Point(47, 49);
+            this.txtP2Name.MaxLength = 32767;
+            this.txtP2Name.Multiline = false;
+            this.txtP2Name.Name = "txtP2Name";
+            this.txtP2Name.Size = new System.Drawing.Size(153, 20);
+            this.txtP2Name.TabIndex = 15;
+            this.txtP2Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // lblP2
             // 
@@ -389,20 +493,17 @@ namespace AgnaPanel
             this.lblP2.TabIndex = 14;
             this.lblP2.Text = "Player 2";
             // 
-            // comboP1Game
+            // comboP1Category
             // 
-            this.comboP1Game.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboP1Game.FormattingEnabled = true;
-            this.comboP1Game.Items.AddRange(new object[] {
-            "None",
-            "Smash 64",
-            "Melee",
-            "Brawl",
-            "Smash 4"});
-            this.comboP1Game.Location = new System.Drawing.Point(47, 21);
-            this.comboP1Game.Name = "comboP1Game";
-            this.comboP1Game.Size = new System.Drawing.Size(84, 21);
-            this.comboP1Game.TabIndex = 12;
+            this.comboP1Category.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboP1Category.FormattingEnabled = true;
+            this.comboP1Category.Items.AddRange(new object[] {
+            "None"});
+            this.comboP1Category.Location = new System.Drawing.Point(47, 21);
+            this.comboP1Category.Name = "comboP1Category";
+            this.comboP1Category.Size = new System.Drawing.Size(84, 21);
+            this.comboP1Category.TabIndex = 12;
+            this.comboP1Category.SelectedIndexChanged += new System.EventHandler(this.comboP1Category_SelectedIndexChanged);
             // 
             // btnSwapNames
             // 
@@ -436,6 +537,23 @@ namespace AgnaPanel
             this.btnSwapChars.Size = new System.Drawing.Size(19, 81);
             this.btnSwapChars.TabIndex = 11;
             this.btnSwapChars.UseVisualStyleBackColor = true;
+            // 
+            // txtP1Name
+            // 
+            this.txtP1Name.AcceptsReturn = false;
+            this.txtP1Name.AcceptsTab = false;
+            this.txtP1Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.txtP1Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.txtP1Name.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtP1Name.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtP1Name.Lines = new string[0];
+            this.txtP1Name.Location = new System.Drawing.Point(47, 5);
+            this.txtP1Name.MaxLength = 32767;
+            this.txtP1Name.Multiline = false;
+            this.txtP1Name.Name = "txtP1Name";
+            this.txtP1Name.Size = new System.Drawing.Size(153, 20);
+            this.txtP1Name.TabIndex = 3;
+            this.txtP1Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // lblP1
             // 
@@ -486,6 +604,23 @@ namespace AgnaPanel
             this.tabSpecial.Text = "Special";
             this.tabSpecial.UseVisualStyleBackColor = true;
             // 
+            // txtAnnouncement
+            // 
+            this.txtAnnouncement.AcceptsReturn = false;
+            this.txtAnnouncement.AcceptsTab = false;
+            this.txtAnnouncement.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtAnnouncement.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtAnnouncement.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtAnnouncement.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtAnnouncement.Lines = new string[0];
+            this.txtAnnouncement.Location = new System.Drawing.Point(106, 74);
+            this.txtAnnouncement.MaxLength = 32767;
+            this.txtAnnouncement.Multiline = false;
+            this.txtAnnouncement.Name = "txtAnnouncement";
+            this.txtAnnouncement.Size = new System.Drawing.Size(156, 20);
+            this.txtAnnouncement.TabIndex = 11;
+            this.txtAnnouncement.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
             // lblAnnouncement
             // 
             this.lblAnnouncement.AutoSize = true;
@@ -494,6 +629,23 @@ namespace AgnaPanel
             this.lblAnnouncement.Size = new System.Drawing.Size(79, 13);
             this.lblAnnouncement.TabIndex = 10;
             this.lblAnnouncement.Text = "Announcement";
+            // 
+            // txtMusic
+            // 
+            this.txtMusic.AcceptsReturn = false;
+            this.txtMusic.AcceptsTab = false;
+            this.txtMusic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtMusic.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtMusic.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtMusic.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtMusic.Lines = new string[0];
+            this.txtMusic.Location = new System.Drawing.Point(18, 74);
+            this.txtMusic.MaxLength = 32767;
+            this.txtMusic.Multiline = false;
+            this.txtMusic.Name = "txtMusic";
+            this.txtMusic.Size = new System.Drawing.Size(79, 20);
+            this.txtMusic.TabIndex = 9;
+            this.txtMusic.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // lblMusic
             // 
@@ -514,6 +666,23 @@ namespace AgnaPanel
             this.pictureMusicNote.TabIndex = 7;
             this.pictureMusicNote.TabStop = false;
             // 
+            // txtCamera2
+            // 
+            this.txtCamera2.AcceptsReturn = false;
+            this.txtCamera2.AcceptsTab = false;
+            this.txtCamera2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtCamera2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtCamera2.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtCamera2.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtCamera2.Lines = new string[0];
+            this.txtCamera2.Location = new System.Drawing.Point(18, 45);
+            this.txtCamera2.MaxLength = 32767;
+            this.txtCamera2.Multiline = false;
+            this.txtCamera2.Name = "txtCamera2";
+            this.txtCamera2.Size = new System.Drawing.Size(79, 20);
+            this.txtCamera2.TabIndex = 6;
+            this.txtCamera2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
             // lblCamera2
             // 
             this.lblCamera2.AutoSize = true;
@@ -522,6 +691,23 @@ namespace AgnaPanel
             this.lblCamera2.Size = new System.Drawing.Size(52, 13);
             this.lblCamera2.TabIndex = 5;
             this.lblCamera2.Text = "Camera 2";
+            // 
+            // txtCamera1
+            // 
+            this.txtCamera1.AcceptsReturn = false;
+            this.txtCamera1.AcceptsTab = false;
+            this.txtCamera1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtCamera1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtCamera1.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtCamera1.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtCamera1.Lines = new string[0];
+            this.txtCamera1.Location = new System.Drawing.Point(18, 16);
+            this.txtCamera1.MaxLength = 32767;
+            this.txtCamera1.Multiline = false;
+            this.txtCamera1.Name = "txtCamera1";
+            this.txtCamera1.Size = new System.Drawing.Size(79, 20);
+            this.txtCamera1.TabIndex = 4;
+            this.txtCamera1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // btnSwapCameras
             // 
@@ -564,6 +750,23 @@ namespace AgnaPanel
             this.tabCommentary.TabIndex = 1;
             this.tabCommentary.Text = "Commentators";
             this.tabCommentary.UseVisualStyleBackColor = true;
+            // 
+            // txtComm2Twitter
+            // 
+            this.txtComm2Twitter.AcceptsReturn = false;
+            this.txtComm2Twitter.AcceptsTab = false;
+            this.txtComm2Twitter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtComm2Twitter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtComm2Twitter.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtComm2Twitter.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtComm2Twitter.Lines = new string[0];
+            this.txtComm2Twitter.Location = new System.Drawing.Point(140, 45);
+            this.txtComm2Twitter.MaxLength = 32767;
+            this.txtComm2Twitter.Multiline = false;
+            this.txtComm2Twitter.Name = "txtComm2Twitter";
+            this.txtComm2Twitter.Size = new System.Drawing.Size(113, 20);
+            this.txtComm2Twitter.TabIndex = 15;
+            this.txtComm2Twitter.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // lblComm2Twitter
             // 
@@ -614,6 +817,57 @@ namespace AgnaPanel
             this.lblComm1.Size = new System.Drawing.Size(78, 13);
             this.lblComm1.TabIndex = 7;
             this.lblComm1.Text = "Commentator 1";
+            // 
+            // txtComm1Twitter
+            // 
+            this.txtComm1Twitter.AcceptsReturn = false;
+            this.txtComm1Twitter.AcceptsTab = false;
+            this.txtComm1Twitter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtComm1Twitter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtComm1Twitter.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtComm1Twitter.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtComm1Twitter.Lines = new string[0];
+            this.txtComm1Twitter.Location = new System.Drawing.Point(140, 16);
+            this.txtComm1Twitter.MaxLength = 32767;
+            this.txtComm1Twitter.Multiline = false;
+            this.txtComm1Twitter.Name = "txtComm1Twitter";
+            this.txtComm1Twitter.Size = new System.Drawing.Size(113, 20);
+            this.txtComm1Twitter.TabIndex = 13;
+            this.txtComm1Twitter.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // txtComm2
+            // 
+            this.txtComm2.AcceptsReturn = false;
+            this.txtComm2.AcceptsTab = false;
+            this.txtComm2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtComm2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtComm2.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtComm2.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtComm2.Lines = new string[0];
+            this.txtComm2.Location = new System.Drawing.Point(18, 45);
+            this.txtComm2.MaxLength = 32767;
+            this.txtComm2.Multiline = false;
+            this.txtComm2.Name = "txtComm2";
+            this.txtComm2.Size = new System.Drawing.Size(113, 20);
+            this.txtComm2.TabIndex = 11;
+            this.txtComm2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            // 
+            // txtComm1
+            // 
+            this.txtComm1.AcceptsReturn = false;
+            this.txtComm1.AcceptsTab = false;
+            this.txtComm1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtComm1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtComm1.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
+            this.txtComm1.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.txtComm1.Lines = new string[0];
+            this.txtComm1.Location = new System.Drawing.Point(18, 16);
+            this.txtComm1.MaxLength = 32767;
+            this.txtComm1.Multiline = false;
+            this.txtComm1.Name = "txtComm1";
+            this.txtComm1.Size = new System.Drawing.Size(113, 20);
+            this.txtComm1.TabIndex = 9;
+            this.txtComm1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
             // tabCustom
             // 
@@ -673,11 +927,6 @@ namespace AgnaPanel
             this.trayIcon.Text = "AgnaPanel";
             this.trayIcon.DoubleClick += new System.EventHandler(this.trayIcon_DoubleClick);
             // 
-            // timerChat
-            // 
-            this.timerChat.Interval = 250;
-            this.timerChat.Tick += new System.EventHandler(this.timerChat_Tick);
-            // 
             // trayIcon_menu
             // 
             this.trayIcon_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -700,266 +949,14 @@ namespace AgnaPanel
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
-            // txtMatch
+            // timerChat
             // 
-            this.txtMatch.AcceptsReturn = false;
-            this.txtMatch.AcceptsTab = false;
-            this.txtMatch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Append;
-            this.txtMatch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtMatch.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtMatch.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtMatch.Lines = new string[0];
-            this.txtMatch.Location = new System.Drawing.Point(189, 13);
-            this.txtMatch.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.txtMatch.MaxLength = 32767;
-            this.txtMatch.Multiline = false;
-            this.txtMatch.Name = "txtMatch";
-            this.txtMatch.Size = new System.Drawing.Size(90, 20);
-            this.txtMatch.TabIndex = 5;
-            this.txtMatch.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtEvent
-            // 
-            this.txtEvent.AcceptsReturn = false;
-            this.txtEvent.AcceptsTab = false;
-            this.txtEvent.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtEvent.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtEvent.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtEvent.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtEvent.Lines = new string[0];
-            this.txtEvent.Location = new System.Drawing.Point(96, 13);
-            this.txtEvent.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.txtEvent.MaxLength = 32767;
-            this.txtEvent.Multiline = false;
-            this.txtEvent.Name = "txtEvent";
-            this.txtEvent.Size = new System.Drawing.Size(90, 20);
-            this.txtEvent.TabIndex = 4;
-            this.txtEvent.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtTournamentName
-            // 
-            this.txtTournamentName.AcceptsReturn = false;
-            this.txtTournamentName.AcceptsTab = false;
-            this.txtTournamentName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtTournamentName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtTournamentName.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtTournamentName.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtTournamentName.Lines = new string[0];
-            this.txtTournamentName.Location = new System.Drawing.Point(3, 13);
-            this.txtTournamentName.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
-            this.txtTournamentName.MaxLength = 32767;
-            this.txtTournamentName.Multiline = false;
-            this.txtTournamentName.Name = "txtTournamentName";
-            this.txtTournamentName.Size = new System.Drawing.Size(90, 20);
-            this.txtTournamentName.TabIndex = 3;
-            this.txtTournamentName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtP1Score
-            // 
-            this.txtP1Score.AcceptsReturn = false;
-            this.txtP1Score.AcceptsTab = false;
-            this.txtP1Score.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtP1Score.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtP1Score.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtP1Score.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtP1Score.Lines = new string[0];
-            this.txtP1Score.Location = new System.Drawing.Point(202, 5);
-            this.txtP1Score.MaxLength = 32767;
-            this.txtP1Score.Multiline = false;
-            this.txtP1Score.Name = "txtP1Score";
-            this.txtP1Score.Size = new System.Drawing.Size(28, 20);
-            this.txtP1Score.TabIndex = 16;
-            this.txtP1Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtP2Score
-            // 
-            this.txtP2Score.AcceptsReturn = false;
-            this.txtP2Score.AcceptsTab = false;
-            this.txtP2Score.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtP2Score.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtP2Score.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtP2Score.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtP2Score.Lines = new string[0];
-            this.txtP2Score.Location = new System.Drawing.Point(202, 49);
-            this.txtP2Score.MaxLength = 32767;
-            this.txtP2Score.Multiline = false;
-            this.txtP2Score.Name = "txtP2Score";
-            this.txtP2Score.Size = new System.Drawing.Size(28, 20);
-            this.txtP2Score.TabIndex = 16;
-            this.txtP2Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // txtP2Name
-            // 
-            this.txtP2Name.AcceptsReturn = false;
-            this.txtP2Name.AcceptsTab = false;
-            this.txtP2Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtP2Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtP2Name.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtP2Name.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtP2Name.Lines = new string[0];
-            this.txtP2Name.Location = new System.Drawing.Point(47, 49);
-            this.txtP2Name.MaxLength = 32767;
-            this.txtP2Name.Multiline = false;
-            this.txtP2Name.Name = "txtP2Name";
-            this.txtP2Name.Size = new System.Drawing.Size(153, 20);
-            this.txtP2Name.TabIndex = 15;
-            this.txtP2Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtP1Name
-            // 
-            this.txtP1Name.AcceptsReturn = false;
-            this.txtP1Name.AcceptsTab = false;
-            this.txtP1Name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.txtP1Name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.txtP1Name.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtP1Name.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtP1Name.Lines = new string[0];
-            this.txtP1Name.Location = new System.Drawing.Point(47, 5);
-            this.txtP1Name.MaxLength = 32767;
-            this.txtP1Name.Multiline = false;
-            this.txtP1Name.Name = "txtP1Name";
-            this.txtP1Name.Size = new System.Drawing.Size(153, 20);
-            this.txtP1Name.TabIndex = 3;
-            this.txtP1Name.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtAnnouncement
-            // 
-            this.txtAnnouncement.AcceptsReturn = false;
-            this.txtAnnouncement.AcceptsTab = false;
-            this.txtAnnouncement.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtAnnouncement.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtAnnouncement.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtAnnouncement.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtAnnouncement.Lines = new string[0];
-            this.txtAnnouncement.Location = new System.Drawing.Point(106, 74);
-            this.txtAnnouncement.MaxLength = 32767;
-            this.txtAnnouncement.Multiline = false;
-            this.txtAnnouncement.Name = "txtAnnouncement";
-            this.txtAnnouncement.Size = new System.Drawing.Size(156, 20);
-            this.txtAnnouncement.TabIndex = 11;
-            this.txtAnnouncement.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtMusic
-            // 
-            this.txtMusic.AcceptsReturn = false;
-            this.txtMusic.AcceptsTab = false;
-            this.txtMusic.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtMusic.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtMusic.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtMusic.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtMusic.Lines = new string[0];
-            this.txtMusic.Location = new System.Drawing.Point(18, 74);
-            this.txtMusic.MaxLength = 32767;
-            this.txtMusic.Multiline = false;
-            this.txtMusic.Name = "txtMusic";
-            this.txtMusic.Size = new System.Drawing.Size(79, 20);
-            this.txtMusic.TabIndex = 9;
-            this.txtMusic.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtCamera2
-            // 
-            this.txtCamera2.AcceptsReturn = false;
-            this.txtCamera2.AcceptsTab = false;
-            this.txtCamera2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtCamera2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtCamera2.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtCamera2.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtCamera2.Lines = new string[0];
-            this.txtCamera2.Location = new System.Drawing.Point(18, 45);
-            this.txtCamera2.MaxLength = 32767;
-            this.txtCamera2.Multiline = false;
-            this.txtCamera2.Name = "txtCamera2";
-            this.txtCamera2.Size = new System.Drawing.Size(79, 20);
-            this.txtCamera2.TabIndex = 6;
-            this.txtCamera2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtCamera1
-            // 
-            this.txtCamera1.AcceptsReturn = false;
-            this.txtCamera1.AcceptsTab = false;
-            this.txtCamera1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtCamera1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtCamera1.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtCamera1.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtCamera1.Lines = new string[0];
-            this.txtCamera1.Location = new System.Drawing.Point(18, 16);
-            this.txtCamera1.MaxLength = 32767;
-            this.txtCamera1.Multiline = false;
-            this.txtCamera1.Name = "txtCamera1";
-            this.txtCamera1.Size = new System.Drawing.Size(79, 20);
-            this.txtCamera1.TabIndex = 4;
-            this.txtCamera1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtComm2Twitter
-            // 
-            this.txtComm2Twitter.AcceptsReturn = false;
-            this.txtComm2Twitter.AcceptsTab = false;
-            this.txtComm2Twitter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtComm2Twitter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtComm2Twitter.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtComm2Twitter.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtComm2Twitter.Lines = new string[0];
-            this.txtComm2Twitter.Location = new System.Drawing.Point(140, 45);
-            this.txtComm2Twitter.MaxLength = 32767;
-            this.txtComm2Twitter.Multiline = false;
-            this.txtComm2Twitter.Name = "txtComm2Twitter";
-            this.txtComm2Twitter.Size = new System.Drawing.Size(113, 20);
-            this.txtComm2Twitter.TabIndex = 15;
-            this.txtComm2Twitter.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtComm1Twitter
-            // 
-            this.txtComm1Twitter.AcceptsReturn = false;
-            this.txtComm1Twitter.AcceptsTab = false;
-            this.txtComm1Twitter.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtComm1Twitter.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtComm1Twitter.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtComm1Twitter.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtComm1Twitter.Lines = new string[0];
-            this.txtComm1Twitter.Location = new System.Drawing.Point(140, 16);
-            this.txtComm1Twitter.MaxLength = 32767;
-            this.txtComm1Twitter.Multiline = false;
-            this.txtComm1Twitter.Name = "txtComm1Twitter";
-            this.txtComm1Twitter.Size = new System.Drawing.Size(113, 20);
-            this.txtComm1Twitter.TabIndex = 13;
-            this.txtComm1Twitter.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtComm2
-            // 
-            this.txtComm2.AcceptsReturn = false;
-            this.txtComm2.AcceptsTab = false;
-            this.txtComm2.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtComm2.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtComm2.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtComm2.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtComm2.Lines = new string[0];
-            this.txtComm2.Location = new System.Drawing.Point(18, 45);
-            this.txtComm2.MaxLength = 32767;
-            this.txtComm2.Multiline = false;
-            this.txtComm2.Name = "txtComm2";
-            this.txtComm2.Size = new System.Drawing.Size(113, 20);
-            this.txtComm2.TabIndex = 11;
-            this.txtComm2.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            // 
-            // txtComm1
-            // 
-            this.txtComm1.AcceptsReturn = false;
-            this.txtComm1.AcceptsTab = false;
-            this.txtComm1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
-            this.txtComm1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
-            this.txtComm1.DefaultBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(122)))), ((int)(((byte)(122)))));
-            this.txtComm1.FocusedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
-            this.txtComm1.Lines = new string[0];
-            this.txtComm1.Location = new System.Drawing.Point(18, 16);
-            this.txtComm1.MaxLength = 32767;
-            this.txtComm1.Multiline = false;
-            this.txtComm1.Name = "txtComm1";
-            this.txtComm1.Size = new System.Drawing.Size(113, 20);
-            this.txtComm1.TabIndex = 9;
-            this.txtComm1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.timerChat.Interval = 250;
+            this.timerChat.Tick += new System.EventHandler(this.timerChat_Tick);
             // 
             // MainFrm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(499, 286);
@@ -972,6 +969,8 @@ namespace AgnaPanel
             this.Name = "MainFrm";
             this.Text = "AgnaPanel";
             this.Load += new System.EventHandler(this.MainFrm_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.MainFrm_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainFrm_DragEnter);
             this.Resize += new System.EventHandler(this.MainFrm_Resize);
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
@@ -1026,13 +1025,13 @@ namespace AgnaPanel
         private BorderedTextBox txtMatch;
         private BorderedTextBox txtEvent;
         private Panel panelPlayers;
-        private ComboBox comboP2Char;
-        private ComboBox comboP2Game;
+        private ComboBox comboP2Image;
+        private ComboBox comboP2Category;
         private BorderedTextBox txtP2Score;
         private BorderedTextBox txtP2Name;
         private Label lblP2;
-        private ComboBox comboP1Char;
-        private ComboBox comboP1Game;
+        private ComboBox comboP1Image;
+        private ComboBox comboP1Category;
         internal Button btnSwapNames;
         internal Button btnSwapChars;
         private BorderedTextBox txtP1Name;

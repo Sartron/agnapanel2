@@ -14,7 +14,7 @@ namespace AgnaPanel
         public string FilePath { get; set; } = String.Empty;
 
         public XDocument Document { get; }
-        public XElement ID { get; set; }
+        public XElement Name { get; set; }
         public List<AgnaField> Fields { get; set; }
         public List<AgnaImage> Images { get; set; }
 
@@ -24,13 +24,13 @@ namespace AgnaPanel
             Document = XDocument.Parse(Resources.agnascene_clean);
 
             //Parse ID
-            ID = getID(Document);
+            Name = GetName(Document);
 
             //Parse Fields
-            Fields = parseFields(getFields(Document));
+            Fields = ParseFields(GetFields(Document));
 
             //Parse Images
-            Images = parseImages(getImages((Document)));
+            Images = ParseImages(GetImages((Document)));
         }
 
         public AgnaScene(string filePath)
@@ -49,30 +49,29 @@ namespace AgnaPanel
             FilePath = filePath;
 
             //Parse ID
-            ID = getID(Document);
+            Name = GetName(Document);
 
             //Parse Fields
-            Fields = parseFields(getFields(Document));
+            Fields = ParseFields(GetFields(Document));
 
             //Parse Images
-            Images = parseImages(getImages((Document)));
+            Images = ParseImages(GetImages((Document)));
         }
 
-        private XElement getID(XDocument xDocument)
+        private XElement GetName(XDocument xDocument)
         {
-            //Check for either a null 'id' field or duplicate fields
-            if (xDocument.Root.Elements("id").Count() != 1)
-                return new XElement("id", System.IO.Path.GetRandomFileName().Replace(".", String.Empty).Substring(0, 8).ToUpper());
+            //Check for either a null 'name' field or duplicate fields
+            if (xDocument.Root.Elements("name").Count() != 1)
+                return new XElement("name");
 
-            //Get XElement 'id'
-            XElement elementID = xDocument.Root.Element("id");
+            //Get XElement 'name'
+            XElement elementName = xDocument.Root.Element("name");
 
-            //Confirm attributes of XElement 'id', return new ID if not
-            return !elementID.HasAttributes && !elementID.HasElements && !String.IsNullOrWhiteSpace(elementID.Value) && elementID.Value.Length == 8
-                ? elementID : new XElement("id", System.IO.Path.GetRandomFileName().Replace(".", String.Empty).Substring(0, 8).ToUpper());
+            //Return new XElement with only the name if it has value
+            return !String.IsNullOrWhiteSpace(elementName.Value) ? new XElement("name", elementName.Value) : new XElement("name");
         }
 
-        private XElement getFields(XDocument xDocument)
+        private XElement GetFields(XDocument xDocument)
         {
             //Check for either a null 'fields' field or duplicate fields
             if (xDocument.Root.Elements("fields").Count() != 1)
@@ -82,12 +81,11 @@ namespace AgnaPanel
             XElement elementFieldsParent = xDocument.Root.Element("fields");
 
             //Confirm attributes of XElement 'fields', return preset Fields if not
-            return elementFieldsParent.HasElements && elementFieldsParent.Elements().Count() >= 1
-                && elementFieldsParent.Elements("main").Count() == 1 && elementFieldsParent.Element("main").HasElements && elementFieldsParent.Element("main").Elements("field").Count() == 15
+            return elementFieldsParent.Elements("main").Count() == 1 && elementFieldsParent.Element("main").Elements("field").Count() >= 15
                 ? elementFieldsParent : XDocument.Parse(Resources.agnascene_clean).Root.Element("fields");
         }
 
-        public List<AgnaField> parseFields(XElement fieldsParent)
+        public List<AgnaField> ParseFields(XElement fieldsParent)
         {
             List<AgnaField> returnFields = new List<AgnaField>();
 
@@ -99,7 +97,7 @@ namespace AgnaPanel
             }
 
             //Parse custom images
-            if (fieldsParent.Elements("custom").Count() != 1 || !fieldsParent.Element("custom").HasElements)
+            if (fieldsParent.Elements("custom").Count() != 1 || fieldsParent.Element("custom").Elements("field").Count() == 0)
                 return returnFields;
 
             for (int i = 0; i < fieldsParent.Element("custom").Elements("field").Count(); i++)
@@ -111,7 +109,7 @@ namespace AgnaPanel
             return returnFields;
         }
 
-        private XElement getImages(XDocument xDocument)
+        private XElement GetImages(XDocument xDocument)
         {
             //Check for either a null 'images' field or duplicate fields
             if (xDocument.Root.Elements("images").Count() != 1)
@@ -122,12 +120,11 @@ namespace AgnaPanel
 
             //Confirm attributes of XElement 'images', return preset Images if not
 
-            return elementImagesParent.HasElements && elementImagesParent.Elements().Count() >= 1
-                && elementImagesParent.Elements("main").Count() == 1 && elementImagesParent.Element("main").HasElements && elementImagesParent.Element("main").Elements("image").Count() == 2
+            return elementImagesParent.Elements("main").Count() == 1 && elementImagesParent.Element("main").Elements("image").Count() >= 2
                 ? elementImagesParent : XDocument.Parse(Resources.agnascene_clean).Root.Element("images");
         }
 
-        private List<AgnaImage> parseImages(XElement imagesParent)
+        private List<AgnaImage> ParseImages(XElement imagesParent)
         {
             List<AgnaImage> returnImages = new List<AgnaImage>();
 
@@ -139,7 +136,7 @@ namespace AgnaPanel
             }
 
             //Parse custom images
-            if (imagesParent.Elements("custom").Count() != 1 || !imagesParent.Element("custom").HasElements)
+            if (imagesParent.Elements("custom").Count() != 1 || imagesParent.Element("custom").Elements("image").Count() == 0)
                 return returnImages;
 
             for (int i = 0; i < imagesParent.Element("custom").Elements("image").Count(); i++)
@@ -151,7 +148,7 @@ namespace AgnaPanel
             return returnImages;
         }
 
-        public XDocument outputAgnaScene()
+        public XDocument OutputAgnaScene()
         {
             //Get fields
             XElement mainFields = new XElement("main");
@@ -176,7 +173,7 @@ namespace AgnaPanel
             }
 
             return new XDocument(new XElement("agna-scene",
-                (new XElement("id")),
+                (Name),
                 (new XElement("fields", mainFields, customFields.HasElements ? customFields : null)),
                 (new XElement("images", mainImages, customImages.HasElements ? customImages : null))
                 ));
@@ -205,18 +202,29 @@ namespace AgnaPanel
             ReplaceAttributes(new XAttribute("name", name), new XAttribute("color", ColorTranslator.ToHtml(color)));
             Value = value;
         }
+
         public AgnaField(XElement xElement, FieldType type = FieldType.Custom) : base(xElement)
         {
-            ReplaceAttributes(new XAttribute("name", xElement.Attribute("name").Value), new XAttribute("color", ColorTranslator.ToHtml(Color)));
+            //Clear all pre-existing nodes/attributes from the base constructor
+            RemoveAll();
+
+            //Run checks on the two primary attributes: name, color
+            ReplaceAttributes(new XAttribute("name", xElement.Attribute("name") != null ? !String.IsNullOrEmpty(xElement.Attribute("name").Value) ? xElement.Attribute("name").Value : "customField" :
+                "customField"),
+                new XAttribute("color", xElement.Attribute("color") != null ? xElement.Attribute("color").Value.StartsWith("#") && xElement.Attribute("color").Value.Substring(1).Length == 6 ?
+                xElement.Attribute("color").Value : "#000000" : "#000000")
+                );
+
+            //Set value & type
+            Value = xElement.Value;
             Type = type;
         }
 
+        /// <summary>
+        /// Return boolean indicating whether or not the XElement meets the minimum requirements of being an AgnaField
+        /// </summary>
         public static bool isAgnaField(XElement xElement)
         {
-            //Must have 2 or more attributes, and must not contain elements
-            if (!xElement.HasAttributes || xElement.Attributes().Count() < 2 || xElement.HasElements)
-                return false;
-
             //Attribute 'name', 'color' must not be null or empty
             //Attribute 'color must follow the format #XXXXXX
             return xElement.Attribute("name") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("name").Value)
@@ -224,7 +232,13 @@ namespace AgnaPanel
                 && xElement.Attribute("color").Value.StartsWith("#") && xElement.Attribute("color").Value.Substring(1).Length == 6;
         }
 
-        private static string[] validLabels = { "to", "ev", "ma", "an", "mu", "p1", "p2", "s1", "s2", "cam1", "cam2", "co1", "co2", "tw1", "tw2" };
+        /// <summary>
+        /// List of officially supported fields, designated as a "main" field
+        /// </summary>
+        private static string[] validFields = { "to", "ev", "ma", "an", "mu", "p1", "p2", "s1", "s2", "cam1", "cam2", "co1", "co2", "tw1", "tw2" };
+        /// <summary>
+        /// Return boolean indicating whether or not the XElement meets the minimum requirements of being a "main" AgnaField
+        /// </summary>
         public static bool isMainAgnaField(XElement xElement)
         {
             //Check if AgnaField
@@ -232,12 +246,13 @@ namespace AgnaPanel
                 return false;
 
             //Check if 'name' attribute is a valid "main" variable
-            foreach (string label in validLabels)
+            foreach (string label in validFields)
             {
-                if (xElement.Attribute("name").Value.Equals(label))
+                if (xElement.Attribute("name").Value == label)
                     return true;
             }
 
+            //Failed
             return false;
         }
     }
@@ -303,159 +318,45 @@ namespace AgnaPanel
         public enum FieldType { Main, Custom }
         public FieldType Type { get; } = FieldType.Custom;
 
-        //Optional Attributes
-        public enum _Game { None, Smash64, Melee, Brawl, Smash4 };
-        public enum _Character
-        {
-            None,
-            Bayonetta,
-            Bowser,
-            Bowser_Jr,
-            Captain_Falcon,
-            Charizard,
-            Cloud,
-            Corrin,
-            Dark_Pit,
-            Diddy_Kong,
-            Donkey_Kong,
-            Dr_Mario,
-            Duck_Hunt,
-            Falco,
-            Fox,
-            Ganondorf,
-            Greninja,
-            Ice_Climbers,
-            Ike,
-            Ivysaur,
-            Jigglypuff,
-            King_Dedede,
-            Kirby,
-            Link,
-            Little_Mac,
-            Lucario,
-            Lucas,
-            Lucina,
-            Luigi,
-            Mario,
-            Marth,
-            Mega_Man,
-            Meta_Knight,
-            Mewtwo,
-            Mii_Brawler,
-            Mii_Gunner,
-            Mii_Swordfighter,
-            Mr_Game_and_Watch,
-            Ness,
-            Olimar,
-            Pac_Man,
-            Palutena,
-            Peach,
-            Pichu,
-            Pikachu,
-            Pit,
-            Pokémon_Trainer,
-            Rob,
-            Robin,
-            Rosalina,
-            Roy,
-            Ryu,
-            Samus,
-            Sheik,
-            Shulk,
-            Snake,
-            Sonic,
-            Squirtle,
-            Toon_Link,
-            Villager,
-            Wario,
-            Wii_Fit_Trainer,
-            Wolf,
-            Yoshi,
-            Young_Link,
-            Zelda,
-            Zero_Suit_Samus
-        };
-
-        public _Game Game
-        {
-            get
-            {
-                if (Type == FieldType.Main)
-                    return (_Game)Convert.ToInt16(Attribute("game").Value);
-                return _Game.None;
-            }
-            set
-            {
-                if (Type == FieldType.Main && Attribute("game") != null)
-                    Attribute("game").Value = ((int)value).ToString();
-            }
-        }
-
-        public _Character Character
-        {
-            get
-            {
-                if (Type == FieldType.Main)
-                    return (_Character)Convert.ToInt16(Attribute("character").Value);
-                return _Character.None;
-            }
-            set
-            {
-                if (Type == FieldType.Main && Attribute("character") != null)
-                    Attribute("character").Value = ((int)value).ToString();
-            }
-        }
-
-        public AgnaImage(string name, string path, Point location, Size size, float scale, bool reverse) : base(name: "image")
+        public AgnaImage(string name, string path) : base(name: "image")
         {
             ReplaceAttributes(new XAttribute("name", name), new XAttribute("path", path));
-            Add(new XElement("x", location.X), new XElement("y", location.Y), new XElement("w", size.Width), new XElement("h", size.Height), new XElement("scale", scale), new XElement("reverse", reverse), new XElement("base64"));
+            Add(new XElement("x", 0), new XElement("y", 0), new XElement("w", 0), new XElement("h", 0), new XElement("scale", 1.0), new XElement("reverse", false), new XElement("base64"));
         }
 
-        private string[] validElements = { "x", "y", "w", "h", "scale", "reverse", "base64" };
         public AgnaImage(XElement xElement, FieldType type = FieldType.Custom) : base(xElement)
         {
-            if (isCharacterImage(xElement))
-            {
-                RemoveAll();
-                ReplaceAttributes(new XAttribute("name", xElement.Attribute("name").Value),
-                    new XAttribute("game", xElement.Attribute("game").Value),
-                    new XAttribute("character", xElement.Attribute("character").Value),
-                    new XAttribute("path", xElement.Attribute("path").Value));
-                foreach (XElement _xElement in xElement.Elements())
-                {
-                    foreach (string name in validElements)
-                    {
-                        if (_xElement.Name.ToString().Equals(name))
-                            Add(new XElement(_xElement.Name, _xElement.Value));
-                    }
-                }
-                Type = type;
-            }
-            else
-            {
-                RemoveAll();
-                ReplaceAttributes(new XAttribute("name", xElement.Attribute("name").Value), new XAttribute("path", xElement.Attribute("path").Value));
-                foreach (XElement _xElement in xElement.Elements())
-                {
-                    foreach (string name in validElements)
-                    {
-                        if (_xElement.Name.ToString().Equals(name))
-                            Add(new XElement(_xElement.Name, _xElement.Value));
-                    }
-                }
-            }
+            //Clear all pre-existing nodes/attributes from the base constructor
+            RemoveAll();
+
+            //Run checks on the two primary attributes: name, path
+            ReplaceAttributes(new XAttribute("name", xElement.Attribute("name") != null ? !String.IsNullOrEmpty(xElement.Attribute("name").Value) ? xElement.Attribute("name").Value : "customImage" :
+                "customImage"),
+                new XAttribute("path", xElement.Attribute("path") != null ? xElement.Attribute("path").Value : String.Empty)
+                );
+
+            //Fill with image attributes
+            Add(new XElement("x", xElement.Element("x") != null ? xElement.Element("x").Value : "0"),
+                new XElement("y", xElement.Element("y") != null ? xElement.Element("y").Value : "0"),
+                new XElement("w", xElement.Element("w") != null ? xElement.Element("w").Value : "0"),
+                new XElement("h", xElement.Element("h") != null ? xElement.Element("h").Value : "0"),
+                new XElement("scale", xElement.Element("scale") != null ? xElement.Element("scale").Value : "1.0"),
+                new XElement("reverse", xElement.Element("reverse") != null ? xElement.Element("reverse").Value : "false"),
+                new XElement("base64", xElement.Element("base64") != null ? xElement.Element("base64").Value : String.Empty)
+                );
+
+            //Set type
+            Type = type;
         }
 
+        /// <summary>
+        /// Return boolean indicating whether or not the XElement meets the minimum requirements of being an AgnaField
+        /// </summary>
         public static bool isAgnaImage(XElement xElement)
         {
-            //Must have 2 or more attributes, and must contain elements
-            if (!xElement.HasAttributes || xElement.Attributes().Count() < 2 || !xElement.HasElements)
-                return false;
-
             //Make sure there are no duplicate elements
-            if (xElement.Elements("x").Count() != 1 || xElement.Elements("y").Count() != 1 || xElement.Elements("w").Count() != 1 || xElement.Elements("h").Count() != 1
-                || xElement.Elements("scale").Count() != 1 || xElement.Elements("reverse").Count() != 1 || xElement.Elements("base64").Count() != 1)
+            if (xElement.Elements("x").Count() > 1 || xElement.Elements("y").Count() > 1 || xElement.Elements("w").Count() > 1 || xElement.Elements("h").Count() > 1
+                || xElement.Elements("scale").Count() > 1 || xElement.Elements("reverse").Count() > 1 || xElement.Elements("base64").Count() > 1)
                 return false;
 
             //Attribute 'name', 'path' must not be null or empty
@@ -463,41 +364,28 @@ namespace AgnaPanel
                    && xElement.Attribute("path") != null;
         }
 
-        private static string[] validLabels = { "p1", "p2" };
+        /// <summary>
+        /// List of officially supported images, designated as a "main" image
+        /// </summary>
+        private static string[] validImages = { "p1", "p2" };
+        /// <summary>
+        /// Return boolean indicating whether or not the XElement meets the minimum requirements of being a "main" AgnaImage
+        /// </summary>
         public static bool isMainAgnaImage(XElement xElement)
         {
-            //Check if AgnaField
+            //Check if AgnaImage
             if (!isAgnaImage(xElement))
                 return false;
 
             //Check if 'name' attribute is a valid "main" variable
-            foreach (string label in validLabels)
+            foreach (string label in validImages)
             {
                 if (xElement.Attribute("name").Value.Equals(label))
                     return true;
             }
 
+            //Failed
             return false;
-        }
-
-        public static bool isCharacterImage(XElement xElement)
-        {
-            //Must have 4 or more attributes, and must contain elements
-            if (!xElement.HasAttributes || xElement.Attributes().Count() < 4 || !xElement.HasElements)
-                return false;
-
-            //Make sure there are no duplicate elements
-            if (xElement.Elements("x").Count() != 1 || xElement.Elements("y").Count() != 1 || xElement.Elements("w").Count() != 1 || xElement.Elements("h").Count() != 1
-                || xElement.Elements("scale").Count() != 1 || xElement.Elements("reverse").Count() != 1 || xElement.Elements("base64").Count() != 1)
-                return false;
-
-            //Attribute 'name', 'game', 'character' must not be null or empty
-            //'path' can be empty, but cannot be null
-            //'game' can only be between 0-4, 'character' can only be between 0-66
-            return xElement.Attribute("name") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("name").Value)
-                   && xElement.Attribute("game") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("game").Value) && (Convert.ToInt16(xElement.Attribute("game").Value) >= 0 && Convert.ToInt16(xElement.Attribute("game").Value) <= 4)
-                   && xElement.Attribute("character") != null && !String.IsNullOrWhiteSpace(xElement.Attribute("character").Value) && (Convert.ToInt16(xElement.Attribute("character").Value) >= 0 && Convert.ToInt16(xElement.Attribute("character").Value) <= 66)
-                   && xElement.Attribute("path") != null;
         }
     }
 }

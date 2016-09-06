@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsFrm));
             this.cbOnTop = new System.Windows.Forms.CheckBox();
             this.cbTray_close = new System.Windows.Forms.CheckBox();
@@ -58,6 +59,14 @@
             this.listValidUsers = new System.Windows.Forms.ListBox();
             this.lblValidUsers = new System.Windows.Forms.Label();
             this.tabImages = new System.Windows.Forms.TabPage();
+            this.panelImageViewer = new System.Windows.Forms.Panel();
+            this.imageViewer = new System.Windows.Forms.ListView();
+            this.imageTools = new System.Windows.Forms.ToolStrip();
+            this.btnRoot = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnAddCategory = new System.Windows.Forms.ToolStripButton();
+            this.btnDeleteItem = new System.Windows.Forms.ToolStripButton();
+            this.btnEdit = new System.Windows.Forms.ToolStripButton();
             this.tabAutocomplete = new System.Windows.Forms.TabPage();
             this.btnRemoveMatch = new System.Windows.Forms.Button();
             this.txtMatch = new System.Windows.Forms.TextBox();
@@ -71,15 +80,22 @@
             this.listPlayerNames = new System.Windows.Forms.ListBox();
             this.lblPlayerNames = new System.Windows.Forms.Label();
             this.tabMisc = new System.Windows.Forms.TabPage();
+            this.btnClearRecent = new System.Windows.Forms.Button();
             this.lblMiscGroup2 = new System.Windows.Forms.Label();
             this.lblMiscGroup1 = new System.Windows.Forms.Label();
-            this.btnClearRecent = new System.Windows.Forms.Button();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuImageItem = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabBase.SuspendLayout();
             this.tabChat.SuspendLayout();
             this.panelValidUsers.SuspendLayout();
+            this.tabImages.SuspendLayout();
+            this.panelImageViewer.SuspendLayout();
+            this.imageTools.SuspendLayout();
             this.tabAutocomplete.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnChallongeImport)).BeginInit();
             this.tabMisc.SuspendLayout();
+            this.menuImageItem.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbOnTop
@@ -101,7 +117,7 @@
             this.cbTray_close.Margin = new System.Windows.Forms.Padding(1);
             this.cbTray_close.Name = "cbTray_close";
             this.cbTray_close.Size = new System.Drawing.Size(88, 17);
-            this.cbTray_close.TabIndex = 5;
+            this.cbTray_close.TabIndex = 4;
             this.cbTray_close.Text = "Close to Tray";
             this.cbTray_close.UseVisualStyleBackColor = true;
             // 
@@ -113,7 +129,7 @@
             this.cbTray_minimize.Margin = new System.Windows.Forms.Padding(1);
             this.cbTray_minimize.Name = "cbTray_minimize";
             this.cbTray_minimize.Size = new System.Drawing.Size(102, 17);
-            this.cbTray_minimize.TabIndex = 4;
+            this.cbTray_minimize.TabIndex = 3;
             this.cbTray_minimize.Text = "Minimize to Tray";
             this.cbTray_minimize.UseVisualStyleBackColor = true;
             // 
@@ -127,7 +143,7 @@
             this.cbTaskbar.Margin = new System.Windows.Forms.Padding(1);
             this.cbTaskbar.Name = "cbTaskbar";
             this.cbTaskbar.Size = new System.Drawing.Size(106, 17);
-            this.cbTaskbar.TabIndex = 2;
+            this.cbTaskbar.TabIndex = 1;
             this.cbTaskbar.Text = "Show in Taskbar";
             this.cbTaskbar.UseVisualStyleBackColor = true;
             // 
@@ -138,7 +154,7 @@
             this.cbTray.Margin = new System.Windows.Forms.Padding(1);
             this.cbTray.Name = "cbTray";
             this.cbTray.Size = new System.Drawing.Size(125, 17);
-            this.cbTray.TabIndex = 3;
+            this.cbTray.TabIndex = 2;
             this.cbTray.Text = "Show in System Tray";
             this.cbTray.UseVisualStyleBackColor = true;
             this.cbTray.CheckedChanged += new System.EventHandler(this.cbTray_CheckedChanged);
@@ -169,7 +185,7 @@
             this.txtMaxRecent.MaxLength = 2;
             this.txtMaxRecent.Name = "txtMaxRecent";
             this.txtMaxRecent.Size = new System.Drawing.Size(83, 20);
-            this.txtMaxRecent.TabIndex = 15;
+            this.txtMaxRecent.TabIndex = 5;
             this.txtMaxRecent.Text = "10";
             this.txtMaxRecent.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtMaxRecent.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMaxRecent_KeyPress);
@@ -186,22 +202,22 @@
             // rbNewFile
             // 
             this.rbNewFile.AutoSize = true;
+            this.rbNewFile.Checked = true;
             this.rbNewFile.Location = new System.Drawing.Point(157, 36);
             this.rbNewFile.Name = "rbNewFile";
             this.rbNewFile.Size = new System.Drawing.Size(66, 17);
             this.rbNewFile.TabIndex = 1;
+            this.rbNewFile.TabStop = true;
             this.rbNewFile.Text = "New File";
             this.rbNewFile.UseVisualStyleBackColor = true;
             // 
             // rbMostRecent
             // 
             this.rbMostRecent.AutoSize = true;
-            this.rbMostRecent.Checked = true;
             this.rbMostRecent.Location = new System.Drawing.Point(157, 19);
             this.rbMostRecent.Name = "rbMostRecent";
             this.rbMostRecent.Size = new System.Drawing.Size(86, 17);
             this.rbMostRecent.TabIndex = 0;
-            this.rbMostRecent.TabStop = true;
             this.rbMostRecent.Text = "Most Recent";
             this.rbMostRecent.UseVisualStyleBackColor = true;
             // 
@@ -220,7 +236,7 @@
             this.txtChannel.Location = new System.Drawing.Point(9, 97);
             this.txtChannel.Name = "txtChannel";
             this.txtChannel.Size = new System.Drawing.Size(100, 20);
-            this.txtChannel.TabIndex = 6;
+            this.txtChannel.TabIndex = 3;
             // 
             // lblChannel
             // 
@@ -245,7 +261,7 @@
             this.txtOAuthToken.Location = new System.Drawing.Point(9, 58);
             this.txtOAuthToken.Name = "txtOAuthToken";
             this.txtOAuthToken.Size = new System.Drawing.Size(100, 20);
-            this.txtOAuthToken.TabIndex = 3;
+            this.txtOAuthToken.TabIndex = 2;
             this.txtOAuthToken.UseSystemPasswordChar = true;
             // 
             // lblOAuthToken
@@ -312,7 +328,7 @@
             this.txtAddUser.Location = new System.Drawing.Point(126, 97);
             this.txtAddUser.Name = "txtAddUser";
             this.txtAddUser.Size = new System.Drawing.Size(161, 20);
-            this.txtAddUser.TabIndex = 12;
+            this.txtAddUser.TabIndex = 6;
             this.txtAddUser.TextChanged += new System.EventHandler(this.txtAddUser_TextChanged);
             this.txtAddUser.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddUser_KeyPress);
             // 
@@ -322,7 +338,7 @@
             this.btnRemoveUser.Location = new System.Drawing.Point(230, 123);
             this.btnRemoveUser.Name = "btnRemoveUser";
             this.btnRemoveUser.Size = new System.Drawing.Size(57, 23);
-            this.btnRemoveUser.TabIndex = 11;
+            this.btnRemoveUser.TabIndex = 8;
             this.btnRemoveUser.Text = "Remove";
             this.btnRemoveUser.UseVisualStyleBackColor = true;
             this.btnRemoveUser.Click += new System.EventHandler(this.btnRemoveUser_Click);
@@ -333,7 +349,7 @@
             this.btnAddUser.Location = new System.Drawing.Point(126, 123);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(57, 23);
-            this.btnAddUser.TabIndex = 10;
+            this.btnAddUser.TabIndex = 7;
             this.btnAddUser.Text = "Add";
             this.btnAddUser.UseVisualStyleBackColor = true;
             this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
@@ -354,7 +370,7 @@
             this.listValidUsers.Name = "listValidUsers";
             this.listValidUsers.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.listValidUsers.Size = new System.Drawing.Size(161, 75);
-            this.listValidUsers.TabIndex = 8;
+            this.listValidUsers.TabIndex = 5;
             this.listValidUsers.SelectedIndexChanged += new System.EventHandler(this.listValidUsers_SelectedIndexChanged);
             this.listValidUsers.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listValidUsers_MouseUp);
             // 
@@ -369,6 +385,8 @@
             // 
             // tabImages
             // 
+            this.tabImages.Controls.Add(this.panelImageViewer);
+            this.tabImages.Controls.Add(this.imageTools);
             this.tabImages.Location = new System.Drawing.Point(4, 22);
             this.tabImages.Name = "tabImages";
             this.tabImages.Padding = new System.Windows.Forms.Padding(3);
@@ -376,6 +394,100 @@
             this.tabImages.TabIndex = 2;
             this.tabImages.Text = "Images";
             this.tabImages.UseVisualStyleBackColor = true;
+            // 
+            // panelImageViewer
+            // 
+            this.panelImageViewer.Controls.Add(this.imageViewer);
+            this.panelImageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelImageViewer.Location = new System.Drawing.Point(3, 3);
+            this.panelImageViewer.Name = "panelImageViewer";
+            this.panelImageViewer.Size = new System.Drawing.Size(287, 157);
+            this.panelImageViewer.TabIndex = 2;
+            // 
+            // imageViewer
+            // 
+            this.imageViewer.AllowDrop = true;
+            this.imageViewer.BackColor = System.Drawing.SystemColors.Window;
+            this.imageViewer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.imageViewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imageViewer.Location = new System.Drawing.Point(0, 0);
+            this.imageViewer.MultiSelect = false;
+            this.imageViewer.Name = "imageViewer";
+            this.imageViewer.Size = new System.Drawing.Size(287, 157);
+            this.imageViewer.TabIndex = 0;
+            this.imageViewer.UseCompatibleStateImageBehavior = false;
+            this.imageViewer.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.imageViewer_AfterLabelEdit);
+            this.imageViewer.SelectedIndexChanged += new System.EventHandler(this.imageViewer_SelectedIndexChanged);
+            this.imageViewer.DragDrop += new System.Windows.Forms.DragEventHandler(this.imageViewer_DragDrop);
+            this.imageViewer.DragEnter += new System.Windows.Forms.DragEventHandler(this.imageViewer_DragEnter);
+            this.imageViewer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.imageViewer_KeyDown);
+            this.imageViewer.MouseClick += new System.Windows.Forms.MouseEventHandler(this.imageViewer_MouseClick);
+            this.imageViewer.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.imageViewer_MouseDoubleClick);
+            // 
+            // imageTools
+            // 
+            this.imageTools.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.imageTools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.imageTools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnRoot,
+            this.toolStripSeparator1,
+            this.btnAddCategory,
+            this.btnDeleteItem,
+            this.btnEdit});
+            this.imageTools.Location = new System.Drawing.Point(3, 160);
+            this.imageTools.Name = "imageTools";
+            this.imageTools.Size = new System.Drawing.Size(287, 25);
+            this.imageTools.TabIndex = 1;
+            this.imageTools.Text = "imageTools";
+            // 
+            // btnRoot
+            // 
+            this.btnRoot.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRoot.Enabled = false;
+            this.btnRoot.Image = global::AgnaPanel.Properties.Resources.left_arrow;
+            this.btnRoot.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRoot.Name = "btnRoot";
+            this.btnRoot.Size = new System.Drawing.Size(23, 22);
+            this.btnRoot.Text = "Root";
+            this.btnRoot.Click += new System.EventHandler(this.btnRoot_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // btnAddCategory
+            // 
+            this.btnAddCategory.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnAddCategory.Image = global::AgnaPanel.Properties.Resources.add;
+            this.btnAddCategory.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddCategory.Name = "btnAddCategory";
+            this.btnAddCategory.Size = new System.Drawing.Size(23, 22);
+            this.btnAddCategory.Text = "Add";
+            this.btnAddCategory.Click += new System.EventHandler(this.btnAddCategory_Click);
+            // 
+            // btnDeleteItem
+            // 
+            this.btnDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnDeleteItem.Enabled = false;
+            this.btnDeleteItem.Image = global::AgnaPanel.Properties.Resources.remove;
+            this.btnDeleteItem.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnDeleteItem.Name = "btnDeleteItem";
+            this.btnDeleteItem.Size = new System.Drawing.Size(23, 22);
+            this.btnDeleteItem.Tag = "";
+            this.btnDeleteItem.Text = "Remove";
+            this.btnDeleteItem.Click += new System.EventHandler(this.btnDeleteItem_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = global::AgnaPanel.Properties.Resources.edit;
+            this.btnEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(23, 22);
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // tabAutocomplete
             // 
@@ -404,7 +516,7 @@
             this.btnRemoveMatch.Location = new System.Drawing.Point(226, 159);
             this.btnRemoveMatch.Name = "btnRemoveMatch";
             this.btnRemoveMatch.Size = new System.Drawing.Size(61, 23);
-            this.btnRemoveMatch.TabIndex = 10;
+            this.btnRemoveMatch.TabIndex = 8;
             this.btnRemoveMatch.Text = "Remove";
             this.btnRemoveMatch.UseVisualStyleBackColor = true;
             this.btnRemoveMatch.Click += new System.EventHandler(this.btnRemoveMatch_Click);
@@ -414,7 +526,7 @@
             this.txtMatch.Location = new System.Drawing.Point(158, 133);
             this.txtMatch.Name = "txtMatch";
             this.txtMatch.Size = new System.Drawing.Size(129, 20);
-            this.txtMatch.TabIndex = 9;
+            this.txtMatch.TabIndex = 6;
             this.txtMatch.TextChanged += new System.EventHandler(this.txtMatch_TextChanged);
             this.txtMatch.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMatch_KeyPress);
             // 
@@ -424,7 +536,7 @@
             this.btnAddMatch.Location = new System.Drawing.Point(158, 159);
             this.btnAddMatch.Name = "btnAddMatch";
             this.btnAddMatch.Size = new System.Drawing.Size(62, 23);
-            this.btnAddMatch.TabIndex = 8;
+            this.btnAddMatch.TabIndex = 7;
             this.btnAddMatch.Text = "Add";
             this.btnAddMatch.UseVisualStyleBackColor = true;
             this.btnAddMatch.Click += new System.EventHandler(this.btnAddMatch_Click);
@@ -435,7 +547,7 @@
             this.listMatch.Location = new System.Drawing.Point(158, 19);
             this.listMatch.Name = "listMatch";
             this.listMatch.Size = new System.Drawing.Size(129, 108);
-            this.listMatch.TabIndex = 7;
+            this.listMatch.TabIndex = 5;
             this.listMatch.SelectedIndexChanged += new System.EventHandler(this.listMatch_SelectedIndexChanged);
             this.listMatch.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listMatch_MouseUp);
             // 
@@ -454,7 +566,7 @@
             this.btnRemovePlayerName.Location = new System.Drawing.Point(49, 159);
             this.btnRemovePlayerName.Name = "btnRemovePlayerName";
             this.btnRemovePlayerName.Size = new System.Drawing.Size(59, 23);
-            this.btnRemovePlayerName.TabIndex = 5;
+            this.btnRemovePlayerName.TabIndex = 4;
             this.btnRemovePlayerName.Text = "Remove";
             this.btnRemovePlayerName.UseVisualStyleBackColor = true;
             this.btnRemovePlayerName.Click += new System.EventHandler(this.btnRemovePlayerName_Click);
@@ -476,7 +588,7 @@
             this.txtAddPlayer.Location = new System.Drawing.Point(9, 133);
             this.txtAddPlayer.Name = "txtAddPlayer";
             this.txtAddPlayer.Size = new System.Drawing.Size(129, 20);
-            this.txtAddPlayer.TabIndex = 3;
+            this.txtAddPlayer.TabIndex = 2;
             this.txtAddPlayer.TextChanged += new System.EventHandler(this.txtAddPlayer_TextChanged);
             this.txtAddPlayer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddPlayer_KeyPress);
             // 
@@ -486,7 +598,7 @@
             this.btnAddPlayerName.Location = new System.Drawing.Point(9, 159);
             this.btnAddPlayerName.Name = "btnAddPlayerName";
             this.btnAddPlayerName.Size = new System.Drawing.Size(34, 23);
-            this.btnAddPlayerName.TabIndex = 2;
+            this.btnAddPlayerName.TabIndex = 3;
             this.btnAddPlayerName.Text = "Add";
             this.btnAddPlayerName.UseVisualStyleBackColor = true;
             this.btnAddPlayerName.Click += new System.EventHandler(this.btnAddPlayerName_Click);
@@ -534,6 +646,16 @@
             this.tabMisc.Text = "Miscellaneous";
             this.tabMisc.UseVisualStyleBackColor = true;
             // 
+            // btnClearRecent
+            // 
+            this.btnClearRecent.Location = new System.Drawing.Point(157, 103);
+            this.btnClearRecent.Name = "btnClearRecent";
+            this.btnClearRecent.Size = new System.Drawing.Size(83, 23);
+            this.btnClearRecent.TabIndex = 6;
+            this.btnClearRecent.Text = "Clear All";
+            this.btnClearRecent.UseVisualStyleBackColor = true;
+            this.btnClearRecent.Click += new System.EventHandler(this.btnClearRecent_Click);
+            // 
             // lblMiscGroup2
             // 
             this.lblMiscGroup2.AutoSize = true;
@@ -552,15 +674,27 @@
             this.lblMiscGroup1.TabIndex = 13;
             this.lblMiscGroup1.Text = "Program Visibility";
             // 
-            // btnClearRecent
+            // deleteToolStripMenuItem
             // 
-            this.btnClearRecent.Location = new System.Drawing.Point(157, 103);
-            this.btnClearRecent.Name = "btnClearRecent";
-            this.btnClearRecent.Size = new System.Drawing.Size(83, 23);
-            this.btnClearRecent.TabIndex = 17;
-            this.btnClearRecent.Text = "Clear All";
-            this.btnClearRecent.UseVisualStyleBackColor = true;
-            this.btnClearRecent.Click += new System.EventHandler(this.btnClearRecent_Click);
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Remove";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // menuImageItem
+            // 
+            this.menuImageItem.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.menuImageItem.Name = "menuImageItem";
+            this.menuImageItem.Size = new System.Drawing.Size(153, 70);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // SettingsFrm
             // 
@@ -581,11 +715,17 @@
             this.tabChat.ResumeLayout(false);
             this.tabChat.PerformLayout();
             this.panelValidUsers.ResumeLayout(false);
+            this.tabImages.ResumeLayout(false);
+            this.tabImages.PerformLayout();
+            this.panelImageViewer.ResumeLayout(false);
+            this.imageTools.ResumeLayout(false);
+            this.imageTools.PerformLayout();
             this.tabAutocomplete.ResumeLayout(false);
             this.tabAutocomplete.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.btnChallongeImport)).EndInit();
             this.tabMisc.ResumeLayout(false);
             this.tabMisc.PerformLayout();
+            this.menuImageItem.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -613,7 +753,6 @@
         private System.Windows.Forms.Label lblChannel;
         private System.Windows.Forms.TabControl tabBase;
         private System.Windows.Forms.TabPage tabChat;
-        private System.Windows.Forms.TabPage tabImages;
         private System.Windows.Forms.TabPage tabMisc;
         private System.Windows.Forms.Label lblValidUsers;
         private System.Windows.Forms.Panel panelValidUsers;
@@ -636,5 +775,17 @@
         private System.Windows.Forms.ListBox listMatch;
         private System.Windows.Forms.Label lblMatches;
         private System.Windows.Forms.Button btnClearRecent;
+        private System.Windows.Forms.TabPage tabImages;
+        private System.Windows.Forms.ListView imageViewer;
+        private System.Windows.Forms.ToolStrip imageTools;
+        private System.Windows.Forms.Panel panelImageViewer;
+        private System.Windows.Forms.ToolStripButton btnAddCategory;
+        private System.Windows.Forms.ToolStripButton btnRoot;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton btnDeleteItem;
+        private System.Windows.Forms.ToolStripButton btnEdit;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip menuImageItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }

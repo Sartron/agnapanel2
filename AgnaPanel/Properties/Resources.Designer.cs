@@ -61,6 +61,16 @@ namespace AgnaPanel.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap add {
+            get {
+                object obj = ResourceManager.GetObject("add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon agna_wing {
@@ -83,7 +93,7 @@ namespace AgnaPanel.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;agna-scene&gt;
-        ///  &lt;id&gt;&lt;/id&gt;
+        ///  &lt;name&gt;&lt;/name&gt;
         ///  &lt;fields&gt;
         ///    &lt;main&gt;
         ///      &lt;field name=&quot;to&quot; color=&quot;#000000&quot;&gt;&lt;/field&gt;
@@ -94,7 +104,7 @@ namespace AgnaPanel.Properties {
         ///      &lt;field name=&quot;p1&quot; color=&quot;#000000&quot;&gt;&lt;/field&gt;
         ///      &lt;field name=&quot;p2&quot; color=&quot;#000000&quot;&gt;&lt;/field&gt;
         ///      &lt;field name=&quot;s1&quot; color=&quot;#000000&quot;&gt;&lt;/field&gt;
-        ///      &lt;field name=&quot;s2&quot; color= [rest of string was truncated]&quot;;.
+        ///      &lt;field name=&quot;s2&quot; co [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string agnascene_clean {
             get {
@@ -115,9 +125,69 @@ namespace AgnaPanel.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap edit {
+            get {
+                object obj = ResourceManager.GetObject("edit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap folder {
+            get {
+                object obj = ResourceManager.GetObject("folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap image {
+            get {
+                object obj = ResourceManager.GetObject("image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap image_error {
+            get {
+                object obj = ResourceManager.GetObject("image_error", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap left_arrow {
+            get {
+                object obj = ResourceManager.GetObject("left_arrow", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap music_note {
             get {
                 object obj = ResourceManager.GetObject("music_note", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap remove {
+            get {
+                object obj = ResourceManager.GetObject("remove", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -146,14 +216,14 @@ namespace AgnaPanel.Properties {
         ///    &lt;channel /&gt;
         ///    &lt;acceptCmds enabled=&quot;true&quot; /&gt;
         ///	&lt;/chat&gt;
-        ///	&lt;recent max=&quot;10&quot; load=&quot;true&quot; /&gt;
+        ///	&lt;recent max=&quot;10&quot; load=&quot;false&quot; /&gt;
         ///	&lt;autocomplete&gt;
         ///		&lt;rounds&gt;
         ///			&lt;round&gt;Winners Round&lt;/round&gt;
         ///			&lt;round&gt;Winners Quarters&lt;/round&gt;
         ///			&lt;round&gt;Winners Semis&lt;/round&gt;
         ///			&lt;round&gt;Winners Finals&lt;/round&gt;
-        ///			&lt;round&gt;Los [rest of string was truncated]&quot;;.
+        ///			&lt;round&gt;Lo [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string settings_clean {
             get {

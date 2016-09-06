@@ -2,53 +2,24 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
+using AgnaPanel.Controls;
+using System.Collections.Generic;
+using System.IO;
+using AgnaPanel.Properties;
 
 namespace AgnaPanel.Forms
 {
     public partial class SettingsFrm : Form
     {
-        public SettingsFrm()
-        {
-            InitializeComponent();
-        }
+        public bool clickedSave = false;
 
-        private void SettingsFrm_Load(object sender, EventArgs e)
-        {
-            //Debug
-            btnChallongeImport.Enabled = false;
-            btnChallongeImport.Visible = false;
-
-            //Window settings
-            cbOnTop.Checked = Settings.Window.onTop;
-            //cbTaskbar.Checked = Settings.Window.taskbar;
-            cbTray.Checked = Settings.Window.Tray.Enabled;
-            cbTray_minimize.Checked = Settings.Window.Tray.Minimize;
-            cbTray_close.Checked = Settings.Window.Tray.Close;
-
-            //Chat
-            txtUsername.Text = Settings.Chat.Username;
-            txtOAuthToken.Text = Settings.Chat.oAuth;
-            txtChannel.Text = Settings.Chat.Channel;
-            foreach (string user in Settings.Chat.ValidUsers)
-                listValidUsers.Items.Add(user);
-            cbAcceptCmds.Checked = Settings.Chat.acceptCommands;
-
-            //Recent File settings
-            rbMostRecent.Checked = Settings.RecentFiles.Load ? true : false;
-            txtMaxRecent.Text = Settings.RecentFiles.MaxFiles.ToString();
-
-            //Autocomplete
-            foreach (string name in Settings.AutoComplete.Names)
-                listPlayerNames.Items.Add(name);
-            foreach (string match in Settings.AutoComplete.Rounds)
-                listMatch.Items.Add(match);
-
-            //Images
-            //txtImagePath.Text = Settings.Images.Root;
-        }
-
+        /// <summary>
+        /// Save all settings processed through form open
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSaveSettings_Click(object sender, EventArgs e)
-        {
+        {   
             //Window Settings
             Settings.Window.onTop = cbOnTop.Checked;
             Settings.Window.Tray.Enabled = cbTray.Checked;
@@ -73,12 +44,80 @@ namespace AgnaPanel.Forms
             Settings.AutoComplete.Rounds = listMatch.Items.OfType<String>().ToList();
 
             //Images
-            //Settings.Images.Root = txtImagePath.Text;
+            //Clear pre-existing AgnaImageCategory(s)
+            Settings.Images.Categories.Clear();
+
+            //Creates a deep copy of each new Settings.AgnaImageCategory
+            foreach (Settings.AgnaImageCategory category in tempCategories)
+                Settings.Images.Categories.Add(category.Clone()); 
 
             Settings.Save();
+            clickedSave = true;
             Close();
         }
 
+        #region Form
+        public SettingsFrm()
+        {
+            InitializeComponent();
+
+            //Transparent imageViewer ToolStrip
+            imageTools.Renderer = new WindowToolStripRenderer();
+
+            //Icons for imageViewer
+            ImageList imageViewIcons = new ImageList();
+            imageViewIcons.Images.Add(Resources.folder);
+            imageViewIcons.Images.Add(Resources.image);
+            imageViewIcons.Images.Add(Resources.image_error);
+            imageViewer.LargeImageList = imageViewIcons;
+        }
+
+        private void SettingsFrm_Load(object sender, EventArgs e)
+        {
+            //Debug
+            btnChallongeImport.Enabled = false;
+            btnChallongeImport.Visible = false;
+
+            //Window settings
+            cbOnTop.Checked = Settings.Window.onTop;
+            //cbTaskbar.Checked = Settings.Window.taskbar;
+            cbTray.Checked = Settings.Window.Tray.Enabled;
+            cbTray_minimize.Checked = Settings.Window.Tray.Minimize;
+            cbTray_close.Checked = Settings.Window.Tray.Close;
+
+            //Chat
+            txtUsername.Text = Settings.Chat.Username;
+            txtOAuthToken.Text = Settings.Chat.oAuth;
+            txtChannel.Text = Settings.Chat.Channel;
+            foreach (string user in Settings.Chat.ValidUsers)
+                listValidUsers.Items.Add(user);
+            cbAcceptCmds.Checked = Settings.Chat.acceptCommands;
+
+            //Recent File settings
+            if (Settings.RecentFiles.Load)
+                rbMostRecent.Checked = true;
+            else
+                rbNewFile.Checked = true;
+            txtMaxRecent.Text = Settings.RecentFiles.MaxFiles.ToString();
+
+            //Autocomplete
+            foreach (string name in Settings.AutoComplete.Names)
+                listPlayerNames.Items.Add(name);
+            foreach (string match in Settings.AutoComplete.Rounds)
+                listMatch.Items.Add(match);
+
+            //Images
+            tempCategories = new List<Settings.AgnaImageCategory>();
+            foreach (Settings.AgnaImageCategory category in Settings.Images.Categories)
+                tempCategories.Add(category.Clone()); //Creates a deep copy of each Settings.AgnaImageCategory
+
+            //Creates only a shallow copy
+            //tempCategories = new List<Settings.AgnaImageCategory>(Settings.Images.Categories);
+            foreach (Settings.AgnaImageCategory category in tempCategories)
+                imageViewer.Items.Add(category.Name, 0);
+        }
+
+        #endregion
         #region Chat
         private void btnAddUser_Click(object sender, EventArgs e)
         {
@@ -125,6 +164,178 @@ namespace AgnaPanel.Forms
         {
             if (e.Button == MouseButtons.Right)
                 listValidUsers.SelectedIndex = -1;
+        }
+        #endregion
+        #region Images
+        private List<Settings.AgnaImageCategory> tempCategories;
+        private int selectedCategoryIndex = -1;
+
+        private void imageViewer_DragEnter(object sender, DragEventArgs e)
+        {
+            if (selectedCategoryIndex != -1 && e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void imageViewer_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            Cursor.Current = Cursors.WaitCursor;
+            foreach (string file in files)
+            {
+                if (File.GetAttributes(file).HasFlag(FileAttributes.Directory)) //Is Directory
+                {
+                    foreach (string _file in Directory.GetFiles(file))
+                    {
+                        tempCategories[selectedCategoryIndex].AddAgnaImage(_file);
+                        imageViewer.Items.Add(tempCategories[selectedCategoryIndex].Images.Last().Name, 1);
+                    }
+
+                    continue;
+                }
+
+                tempCategories[selectedCategoryIndex].AddAgnaImage(file);
+                imageViewer.Items.Add(tempCategories[selectedCategoryIndex].Images.Last().Name, 1);
+            }
+
+            Cursor.Current = Cursors.Default;
+        }
+
+        private void imageViewer_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (imageViewer.FocusedItem.Bounds.Contains(e.Location))
+                    menuImageItem.Show(Cursor.Position);
+            }
+        }
+
+        private void imageViewer_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //If not root
+            if (selectedCategoryIndex != -1)
+                return;
+
+            selectedCategoryIndex = imageViewer.FocusedItem.Index;
+
+            Settings.AgnaImageCategory selectedCategory = tempCategories[selectedCategoryIndex];
+            imageViewer.Items.Clear();
+            foreach (Settings.AgnaImage image in selectedCategory.Images)
+            {
+                if (File.Exists(image.Path))
+                    imageViewer.Items.Add(!String.IsNullOrWhiteSpace(image.Name) ? image.Name : Path.GetFileName(image.Path), 1);
+                else
+                    imageViewer.Items.Add(!String.IsNullOrWhiteSpace(image.Name) ? image.Name : Path.GetFileName(image.Path), 2);
+            }
+
+            btnRoot.Enabled = true;
+            btnAddCategory.Enabled = false;
+            btnDeleteItem.Enabled = false;
+            btnEdit.Enabled = false;
+        }
+
+        private void btnRoot_Click(object sender, EventArgs e)
+        {
+            selectedCategoryIndex = -1;
+
+            imageViewer.Items.Clear();
+            foreach (Settings.AgnaImageCategory category in tempCategories)
+                imageViewer.Items.Add(category.Name, 0);
+
+            btnRoot.Enabled = false;
+            btnAddCategory.Enabled = true;
+        }
+
+        private void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            tempCategories.Add(new Settings.AgnaImageCategory($"new{imageViewer.Items.Count + 1}"));
+            imageViewer.Items.Add($"new{imageViewer.Items.Count + 1}", 0);
+        }
+
+        private void btnDeleteItem_Click(object sender, EventArgs e)
+        {
+            if (selectedCategoryIndex == -1)
+                tempCategories.RemoveAt(imageViewer.FocusedItem.Index);
+            else
+                tempCategories[selectedCategoryIndex].RemoveAgnaImage(imageViewer.FocusedItem.Index);
+                
+            imageViewer.Items.Remove(imageViewer.FocusedItem);
+            btnDeleteItem.Enabled = false;
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnEdit_Click(sender, e);
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnDeleteItem_Click(sender, e);
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            SettingsFrm_Edit editFrm;
+            if (selectedCategoryIndex == -1)
+                editFrm = new SettingsFrm_Edit(tempCategories[imageViewer.FocusedItem.Index]);
+            else
+                editFrm = new SettingsFrm_Edit(imageViewer.FocusedItem.Index, tempCategories[selectedCategoryIndex]);
+            editFrm.ShowDialog();
+
+            //User actually pressed the save button
+            if (editFrm.Saved)
+            {
+                if (selectedCategoryIndex == -1)
+                {
+                    //Replace existing category
+                    tempCategories[imageViewer.FocusedItem.Index] = editFrm.selectedCategory.Clone();
+                    if (imageViewer.FocusedItem.Text != tempCategories[imageViewer.FocusedItem.Index].Name)
+                        imageViewer.FocusedItem.Text = tempCategories[imageViewer.FocusedItem.Index].Name;
+                }
+                else
+                {
+                    //Replace existing image
+                    tempCategories[selectedCategoryIndex].ReplaceAgnaImage(editFrm.selectedImage.Clone(), imageViewer.FocusedItem.Index);
+                    if (imageViewer.FocusedItem.Text != tempCategories[selectedCategoryIndex].Images[imageViewer.FocusedItem.Index].Name)
+                        imageViewer.FocusedItem.Text = tempCategories[selectedCategoryIndex].Images[imageViewer.FocusedItem.Index].Name;
+                }
+            }
+        }
+
+        private void imageViewer_AfterLabelEdit(object sender, LabelEditEventArgs e)
+        {
+            if (e.Label == null) //No changes made
+                return;
+
+            if (selectedCategoryIndex == -1) //Editing a category
+            {
+                if (String.IsNullOrWhiteSpace(e.Label))
+                    e.CancelEdit = true;
+                else
+                    tempCategories[e.Item].Name = e.Label;
+            }
+            else //Editing an image
+            {
+                Settings.AgnaImage newName = tempCategories[selectedCategoryIndex].Images[e.Item].Clone();
+                newName.Name = e.Label;
+                tempCategories[selectedCategoryIndex].ReplaceAgnaImage(newName, e.Item);
+
+                e.CancelEdit = true;
+                imageViewer.FocusedItem.Text = tempCategories[selectedCategoryIndex].Images[e.Item].Name;
+            }
+        }
+
+        private void imageViewer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btnDeleteItem.Enabled = imageViewer.SelectedIndices.Count > 0;
+            btnEdit.Enabled = imageViewer.SelectedIndices.Count > 0;
+        }
+
+        private void imageViewer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.F2 && imageViewer.FocusedItem != null)
+                btnEdit_Click(sender, e);
         }
         #endregion
         #region Autocomplete

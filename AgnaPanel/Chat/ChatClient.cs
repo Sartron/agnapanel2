@@ -48,7 +48,6 @@ namespace AgnaPanel.Chat
             /// </summary>
             public bool Connected => TcpClient.Connected;
 
-
             public Twitch()
             {
                 //Assign TcpClient

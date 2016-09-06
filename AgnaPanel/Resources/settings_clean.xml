@@ -11,7 +11,7 @@
     <channel />
     <acceptCmds enabled="true" />
 	</chat>
-	<recent max="10" load="true" />
+	<recent max="10" load="false" />
 	<autocomplete>
 		<rounds>
 			<round>Winners Round</round>
@@ -26,13 +26,12 @@
 		</rounds>
 		<names />
 	</autocomplete>
-  <images path="">
+  <images>
     <categories>
-      <category name="None" />
-      <category name="Smash64" />
+      <category name="Smash 64" />
       <category name="Melee" />
       <category name="Brawl" />
-      <category name="Smash4" />
+      <category name="Smash 4" />
     </categories>
   </images>
 </agna-settings>
